@@ -3,32 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .search-container {
-            margin-bottom: 20px;
-        }
-        .results {
-            margin-top: 20px;
-        }
-    </style>
+    <title>English</title>
+    <link rel="stylesheet" href="/front-end/style/style.css">
+    <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg">
 </head>
 <body>
-    <h1>Search Page</h1>
+    <a href="/front-end/pages/index.html" style="position: relative; top: 15px; left: 15px;">
+        <img src="/front-end/favicon500x500.jpeg" alt="Home_Icon" style="width: 50px; height: 50px;">
+    </a>
+    <h1 class="title">Search English words</h1>
     <div class="search-container">
         <label for="search-field">Search:</label>
-        <input type="text" id="search-field" placeholder="Enter your query">
+        <input type="text" id="search-field" placeholder="Enter a word">
         <button id="search-button">Search</button>
     </div>
-    <div class="results" id="results-section">
+    <div id="results-container">
         <h2>Results:</h2>
-        <ul id="results-list">
+        <p id="no-results-message" style="display: none;">No results found.</p>
+        <p id="loading-message" style="display: none;">Loading...</p>
+        <p id="error-message" style="display: none;">An error occurred while fetching results.</p>
+        <p id="searching-message" style="display: none;">Searching...</p>
+        <p id="search-complete-message" style="display: none;">Search complete.</p>
+        <div id="results-list">
             <!-- Search results will be displayed here -->
-        </ul>
+            <div class="wiktionary-results">
+                <div id="wiktionary-etymology"></div>
+                <div id="IPA"></div>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>>
+            </div>
+            <div class="etymonline-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="glosbe-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="e2u-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dict.com-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="wikipedia-results">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </div>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </body>
 </html>

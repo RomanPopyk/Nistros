@@ -41,7 +41,8 @@ a:hover {
 
 /* Basic button styling */
 button {
-    padding: 10px 20px;
+    margin: 0px 10px;
+    padding: 10px 50px;
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -79,4 +80,31 @@ link[rel="icon"] {
     width: 1px;
     height: 32px;
     border-radius: 80%;
+}
+.language-selection-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#description-homepage {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    color: #333;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+#results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+#results-list div {
+    display: none;
 }
