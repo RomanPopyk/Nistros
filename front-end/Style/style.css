@@ -1,0 +1,110 @@
+/* Basic CSS Setup */
+
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set default font and background for the body */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #000000;
+}
+
+/* Container class for layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Basic styling for headings */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Basic styling for links */
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Basic button styling */
+button {
+    margin: 0px 10px;
+    padding: 10px 50px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+    text-align: center;
+    background-color: #03ecf8;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #bab4b4;
+    color: #fff;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+/* Style for favicon */
+link[rel="icon"] {
+    width: 1px;
+    height: 32px;
+    border-radius: 80%;
+}
+.language-selection-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#description-homepage {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    color: #333;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+#results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+#results-list div {
+    display: none;
+}
