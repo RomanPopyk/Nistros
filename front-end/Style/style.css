@@ -106,5 +106,13 @@ link[rel="icon"] {
     margin-top: 20px;
 }
 #results-list div {
+    display: flex;
+}
+#wiktionary-definitions {
     display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

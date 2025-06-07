@@ -13,9 +13,9 @@
     </a>
     <h1 class="title">Search English words</h1>
     <div class="search-container">
-        <label for="search-field">Search:</label>
-        <input type="text" id="search-field" placeholder="Enter a word">
-        <button id="search-button">Search</button>
+        <label for="search-input">Search:</label>
+        <input type="text" id="search-input" placeholder="Enter a word">
+        <button id="search-button" onclick="fetchEtym()">Search</button>
     </div>
     <div id="results-container">
         <h2>Results:</h2>
@@ -29,14 +29,14 @@
             <div class="wiktionary-results">
                 <div id="wiktionary-etymology"></div>
                 <div id="IPA"></div>
-                <ul>
+                <ul id="wiktionary-definitions">
                     <li></li>
                     <li></li>
                     <li></li>
-                </ul>>
+                </ul>
             </div>
             <div class="etymonline-results">
-                <div></div>
+                <div id="etymonline-word"></div>
                 <div></div>
             </div>
             <div class="glosbe-results">
@@ -57,7 +57,7 @@
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="/back-end/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </body>
 </html>
