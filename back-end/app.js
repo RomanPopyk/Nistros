@@ -17,13 +17,31 @@ async function fetchEtym() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, "text/html");
 
-    console.log(data.parse.text["*"])
+    console.log(data.parse.text["*"]);
+    console.log(doc);
 
-    const etymElements = doc.querySelector(".mw-heading");
+   /*  const etymElements = doc.querySelector("#English");
     let content = "";
     etymElements.forEach(el => {
         content += `<p>${el.textContent}</p>`;
-    });
+    }); */
+    console.log(doc.querySelector(".IPA"));
+    const ipaElement = doc.querySelector(".IPA");
+    if (ipaElement) {
+        document.getElementById("IPA").innerText = ipaElement.textContent;
+    } else {
+        document.getElementById("IPA").innerText = "No IPA found.";
+    }
+
+  /*   if (fetchEtym) {
+      let el = etymHeader.parentElement.nextElementSibling;
+      while (el && el.tagName !== "H3") {
+        content += `<p>${el.textContent}</p>`;
+        el = el.nextElementSibling;
+      }
+    } else {
+      content = "Etymology section not found.";
+    } */
 
     document.getElementById("etymonline-word").innerText = content ; /* JSON.stringify(data, null, 2) */
 
