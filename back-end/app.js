@@ -17,6 +17,8 @@ async function fetchEtym() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, "text/html");
 
+    doc.querySelectorAll('script, style').forEach(elout => elout.remove());
+
     console.log(data.parse.text["*"]);
     console.log(doc);
 
@@ -26,7 +28,7 @@ async function fetchEtym() {
         content += `<p>${el.textContent}</p>`;
     }); */
     console.log(doc.querySelector(".mw-content-ltr mw-parser-output"));
-    const ipaElement = doc.querySelector(".mw-content-ltr > p");
+    const ipaElement = doc.querySelector(".mw-content-ltr");
     if (ipaElement) {
         document.getElementById("IPA").innerText = ipaElement.textContent;
     } else {
