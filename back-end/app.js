@@ -2,14 +2,12 @@
 const safeHTML = DOMPurify.sanitize(etyContent);
 document.getElementById("etymology").innerHTML = safeHTML;
 */
-function fetchFromInput() {
-    const word = document.getElementById("search-button").value.trim();
-    fetchIPA(word);
-}
 
-async function fetchIPA(word) {
+async function fetchEtym() {
+    const word = document.getElementById("search-input").value.trim();
+
     /* if (!word) {
-        console.error("No word provided for IPA lookup.");
+        console.error("No word provided for etymology lookup.");
         return;
     } */
     const URL = `https://en.wiktionary.org/w/api.php?action=parse&page=${word}&format=json&origin=*`;
@@ -21,9 +19,13 @@ async function fetchIPA(word) {
 
     console.log(data.parse.text["*"])
 
-    const ipaElements = doc.querySelector(".mw-heading");
+    const etymElements = doc.querySelector(".mw-heading");
+    let content = "";
+    etymElements.forEach(el => {
+        content += `<p>${el.textContent}</p>`;
+    });
 
-    document.getElementById("etymonline-results").innerText = JSON.stringify(data, null, 2);
+    document.getElementById("etymonline-word").innerText = content ; /* JSON.stringify(data, null, 2) */
 
 
 }
