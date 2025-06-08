@@ -17,6 +17,8 @@ async function fetchEtym() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, "text/html");
 
+    doc.querySelectorAll('script, style').forEach(elout => elout.remove());
+
     console.log(data.parse.text["*"]);
     console.log(doc);
 
@@ -25,12 +27,28 @@ async function fetchEtym() {
     etymElements.forEach(el => {
         content += `<p>${el.textContent}</p>`;
     }); */
-    console.log(doc.querySelector(".IPA"));
-    const ipaElement = doc.querySelector(".IPA");
+    console.log(doc.querySelector(".mw-content-ltr mw-parser-output"));
+    const ipaElement = doc.querySelector(".mw-content-ltr");
     if (ipaElement) {
         document.getElementById("IPA").innerText = ipaElement.textContent;
     } else {
         document.getElementById("IPA").innerText = "No IPA found.";
+    }
+    //1. test
+    const englishHeader = doc.querySelector("span#English");
+
+    // 2. Go to its parent <h2>
+    const h2 = englishHeader?.closest("h2");
+
+    // 3. Then go to the next sibling until you find a <p>
+    let el = h2?.nextElementSibling;
+    while (el && el.tagName !== "P") {
+      el = el.nextElementSibling;
+    }
+
+    // 4. If found, get the text
+    if (el) {
+      console.log("Found paragraph:", el.textContent);
     }
 
   /*   if (fetchEtym) {
