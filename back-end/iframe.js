@@ -67,3 +67,30 @@ document.getElementById('search-button').addEventListener('click', function() {
         etymonlineIframe.src = `https://www.etymonline.com/search?q=${encodeURIComponent(word)}`;
     }
 });
+// Function to update the Glosbe link based on the input word
+function updateGlosbeLink() {
+    const word = document.getElementById("search-input").value.trim();
+    const glosbeLink = document.getElementById("glosbe-link");
+    if (word) {
+        glosbeLink.href = `https://glosbe.com/fr/uk/${encodeURIComponent(word)}`;
+    } else {
+        glosbeLink.href = `https://glosbe.com/fr/uk/`; // Set to a default Glosbe URL or empty string if no word
+    }
+}
+
+// Function to update the E2U link based on the input word
+function updateE2ULink() {
+    const word = document.getElementById("search-input").value.trim();
+    const e2uLink = document.getElementById("e2u-link");
+    if (word) {
+        e2uLink.href = `https://e2u.org.ua/s?w=${encodeURIComponent(word)}&dicts=all&highlight=on&filter_lines=on`;
+    } else {
+        e2uLink.href = `https://e2u.org.ua/`; // Set to a default E2U URL or empty string if no word
+    }
+}
+
+// Call updateGlosbeLink, updateE2ULink when the search button is clicked
+document.getElementById('search-button').addEventListener('click', updateGlosbeLink, updateE2ULink);
+
+
+

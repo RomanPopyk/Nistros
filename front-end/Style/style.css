@@ -105,8 +105,10 @@ link[rel="icon"] {
     align-items: center;
     margin-top: 20px;
 }
-#results-list div {
+#results-list {
     display: flex;
+    flex-direction: row;
+    align-items: left;
 }
 #wiktionary-definitions {
     display: none;
@@ -115,4 +117,61 @@ link[rel="icon"] {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* Style for the iframe container */
+.iframe-container {
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 10px;
+}
+/* Style for the tooltips */
+.fancy-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.fancy-tooltip .fancy-tooltip-text {
+    visibility: hidden;
+    width: 220px;
+    background: linear-gradient(135deg, #667eea 0%, #3483e3 100%);
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    padding: 10px 14px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    font-size: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.fancy-tooltip .fancy-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #07b5ef transparent transparent transparent;
+}
+        
+.fancy-tooltip:hover .fancy-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fancy-tooltip img {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.fancy-tooltip:hover img {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
