@@ -13,17 +13,15 @@
     </a>
     <h1 class="title">Search French words</h1>
     <div class="search-container">
-        <label for="search-input">Search:</label>
-        <input type="text" id="search-input" placeholder="Enter a word">
-        <button id="search-button" onclick="fetchEtym()">Search</button>
+        <!-- <label for="search-input">Search:</label> /Label just in case -->
+        <div class="search-input-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Enter a word">
+            <button id="search-button" onclick="fetchEtym()">Search</button>
+        </div>
     </div>
     <div id="results-container">
         <h2>Results:</h2>
-        <p id="no-results-message" style="display: none;">No results found.</p>
-        <p id="loading-message" style="display: none;">Loading...</p>
-        <p id="error-message" style="display: none;">An error occurred while fetching results.</p>
-        <p id="searching-message" style="display: none;">Searching...</p>
-        <p id="search-complete-message" style="display: none;">Search complete.</p>
         <div id="results-list">
             <!-- Search results will be displayed here -->
             <div class="wiktionary-results">
@@ -44,8 +42,14 @@
                 <div></div>
             </div>
             <div class="e2u-results">
-                <div></div>
-                <div></div>
+                <div class="fancy-tooltip">
+                    <a href="https://e2u.org.ua/" target="_blank" id="e2u-link">
+                        <img src="/images/e2u-logo.png" 
+                            alt="E2U" 
+                            width="70px">
+                        <span class="fancy-tooltip-text">E2U Словники</span>
+                    </a>
+                </div>
             </div>
             <div class="dict.com-results">
                 <div></div>
@@ -55,9 +59,20 @@
                 <div></div>
                 <div></div>
             </div>
+            <div class="glosbe-results">
+                <div class="fancy-tooltip">
+                    <a href="https://glosbe.com" target="_blank" id="glosbe-link">
+                        <img src="/images/glosbe-logo.png" 
+                            alt="Glosbe" 
+                            width="100">
+                        <span class="fancy-tooltip-text">Glosbe Словник</span>
+                    </a>
+                </div>
+                <div></div>
+            </div>
         </div>
     </div>
-    <div iframe-container style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <div class="iframe-container">
         <iframe 
             id="en-wiktionary-iframe"
             src="https://en.wiktionary.org/wiki" 
@@ -73,15 +88,15 @@
             style="border: 1px solid #ccc; overflow: auto;">
         </iframe>
         <iframe 
-            id="etymonline-iframe"
-            src="https://www.etymonline.com" 
+            id="dict-iframe"
+            src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" 
             width="50%" 
             height="600px" 
             style="border: 1px solid #ccc; overflow: auto;">
         </iframe>
         <iframe 
-            id="dict-iframe"
-            src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" 
+            id="etymonline-iframe"
+            src="https://www.etymonline.com" 
             width="50%" 
             height="600px" 
             style="border: 1px solid #ccc; overflow: auto;">
