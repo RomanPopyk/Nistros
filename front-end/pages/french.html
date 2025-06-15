@@ -8,109 +8,81 @@
     <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg">
 </head>
 <body>
-    <a href="/front-end/pages/index.html" style="position: relative; top: 15px; left: 15px;">
-        <img src="/front-end/favicon500x500.jpeg" alt="Home_Icon" style="width: 50px; height: 50px;">
-    </a>
-    <h1 class="title">Search French words</h1>
-    <div class="search-container">
-        <!-- <label for="search-input">Search:</label> /Label just in case -->
-        <div class="search-input-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="search-input" placeholder="Enter a word">
-            <button id="search-button" onclick="fetchEtym()">Search</button>
-        </div>
-    </div>
-    <div id="results-container">
-        <h2>Results:</h2>
-        <div id="results-list">
-            <!-- Search results will be displayed here -->
-            <div class="wiktionary-results">
-                <div id="wiktionary-etymology"></div>
-                <div id="IPA"></div>
-                <ul id="wiktionary-definitions">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+    <header>
+        <a href="/front-end/pages/index.html" style="position: relative; top: 15px; left: 15px;">
+            <img src="/front-end/favicon500x500.jpeg" alt="Home_Icon" style="width: 50px; height: 50px;">
+        </a>
+        <h1 class="title">Search French words</h1>
+    </header>
+    <main>
+        <section class="search-container">
+            <div class="search-input-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" class="search-field" placeholder="Enter a word">
+                <button id="search-button" class="update-button">Search</button>
             </div>
-            <div class="etymonline-results">
-                <div id="etymonline-word"></div>
-                <div></div>
+        </section>
+        <!-- Iframe Layout Controls -->
+        <section class="iframe-layout-controls">
+            <div class="iframe-layout-option active" onclick="switchLayout('iframe-tabs')">
+                <input type="radio" name="layout" id="iframe-tabs" checked>
+                <label for="iframe-tabs">📑 Tabs </label>
             </div>
-            <div class="glosbe-results">
-                <div></div>
-                <div></div>
+            <div class="iframe-layout-option" onclick="switchLayout('grid')">
+                <input type="radio" name="layout" id="grid">
+                <label for="grid">▦ Grid (2x2)</label>
             </div>
-            <div class="e2u-results">
-                <div class="fancy-tooltip">
-                    <a href="https://e2u.org.ua/" target="_blank" id="e2u-link">
-                        <img src="/images/e2u-logo.png" 
-                            alt="E2U" 
-                            width="70px">
-                        <span class="fancy-tooltip-text">E2U Словники</span>
-                    </a>
-                </div>
+        </section>
+        <!-- Tab Layout -->
+        <section class="tab-container" id="tab-layout">
+            <div class="tab-header">
+                <button class="tab-button active" onclick="switchTab('en-wiktionary-tab', this)">📚 EN Wiktionary</button>
+                <button class="tab-button" onclick="switchTab('fr-wiktionary-tab', this)">📖 FR Wiktionary</button>
+                <button class="tab-button" onclick="switchTab('dict-fr-ua-tab', this)">🔤 Dict.com</button>
+                <button class="tab-button" onclick="switchTab('etymonline-tab', this)">🌱 Etymology</button>
+                <button class="tab-button" onclick="switchTab('fr-wikipedia-tab', this)">🌐 FR Wikipedia</button>
             </div>
-            <div class="dict.com-results">
-                <div></div>
-                <div></div>
+            
+            <div class="en-wiktionary-tab tab-content active">
+                <iframe class="dynamic-iframe" data-target-site="en-wiktionary" src="https://en.wiktionary.org/wiki" title="English Wiktionary"></iframe>
             </div>
-            <div class="wikipedia-results">
-                <div></div>
-                <div></div>
+            <div class="fr-wiktionary-tab tab-content">
+                <iframe class="dynamic-iframe" data-target-site="fr-wiktionary" src="https://fr.wiktionary.org/wiki" title="French Wiktionary"></iframe>
             </div>
-            <div class="glosbe-results">
-                <div class="fancy-tooltip">
-                    <a href="https://glosbe.com" target="_blank" id="glosbe-link">
-                        <img src="/images/glosbe-logo.png" 
-                            alt="Glosbe" 
-                            width="100">
-                        <span class="fancy-tooltip-text">Glosbe Словник</span>
-                    </a>
-                </div>
-                <div></div>
+            <div class="dict-fr-ua-tab tab-content">
+                <iframe class="dynamic-iframe" data-target-site="dict-fr-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
             </div>
-        </div>
-    </div>
-    <div class="iframe-container">
-        <iframe 
-            id="en-wiktionary-iframe"
-            src="https://en.wiktionary.org/wiki" 
-            width="50%" 
-            height="600px" 
-            style="border: 1px solid #ccc; overflow: auto;">
-        </iframe>
-        <iframe 
-            id="fr-wiktionary-iframe"
-            src="https://fr.wiktionary.org/wiki" 
-            width="50%" 
-            height="600px" 
-            style="border: 1px solid #ccc; overflow: auto;">
-        </iframe>
-        <iframe 
-            id="dict-iframe"
-            src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" 
-            width="50%" 
-            height="600px" 
-            style="border: 1px solid #ccc; overflow: auto;">
-        </iframe>
-        <iframe 
-            id="etymonline-iframe"
-            src="https://www.etymonline.com" 
-            width="50%" 
-            height="600px" 
-            style="border: 1px solid #ccc; overflow: auto;">
-        </iframe>
-        <iframe 
-            id="fr-wikipedia-iframe"
-            src="https://fr.wikipedia.org/wiki" 
-            width="50%" 
-            height="600px" 
-            style="border: 1px solid #ccc; overflow: auto;">
-        </iframe>
-    </div>
-<!--     <script src="/back-end/app.js"></script> -->
+            <div class="etymonline-tab tab-content">
+                <iframe class="dynamic-iframe" data-target-site="etymonline" src="https://www.etymonline.com" title="Etymology Online"></iframe>
+            </div>
+            <div class="fr-wikipedia-tab tab-content">
+                <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
+            </div>
+        </section>
+        <!-- Grid Layout -->
+        <section class="iframe-grid" id="grid-layout">
+            <div class="iframe-card">
+                <div class="iframe-card-header">📚 English Wiktionary</div>
+                <iframe class="dynamic-iframe" data-target-site="en-wiktionary" src="https://en.wiktionary.org/wiki" title="English Wiktionary"></iframe>
+            </div>
+            <div class="iframe-card">
+                <div class="iframe-card-header">📖 French Wiktionary</div>
+                <iframe class="dynamic-iframe" data-target-site="fr-wiktionary" src="https://fr.wiktionary.org/wiki" title="French Wiktionary"></iframe>
+            </div>
+            <div class="iframe-card">
+                <div class="iframe-card-header">🔤 Dict.com</div>
+                <iframe class="dynamic-iframe" data-target-site="dict-fr-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
+            </div>
+            <div class="iframe-card">
+                <div class="iframe-card-header">🌱 Etymology Online</div>
+                <iframe class="dynamic-iframe" data-target-site="etymonline" src="https://www.etymonline.com" title="Etymology Online"></iframe>
+            </div>
+            <div class="iframe-card">
+                <div class="iframe-card-header">🌐 French Wikipedia</div>
+                <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
+        </section>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-    <script src="/back-end/iframe.js"></script>
+    <script src="/back-end/iframes.js"></script>
 </body>
 </html>
