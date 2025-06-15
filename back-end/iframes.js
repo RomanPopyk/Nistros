@@ -90,7 +90,7 @@ function switchLayout(layoutType) {
 }
 
 // Tab switching
-function switchTab(tabId) {
+function switchTab(tabClass, clickedButton) {
     // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -101,12 +101,12 @@ function switchTab(tabId) {
         button.classList.remove('active');
     });
     
-    // Show selected tab by its ID
-    const selectedTabContent = document.getElementById(tabId);
+    // Show selected tab by its class
+    const selectedTabContent = document.querySelector(`.${tabClass}.tab-content`);
     if (selectedTabContent) {
         selectedTabContent.classList.add('active');
     } else {
-        console.warn(`Tab content with ID '${tabId}' not found.`);
+        console.warn(`Tab content with class '${tabClass}' not found.`);
     }
 
     // Add active class to the clicked button
