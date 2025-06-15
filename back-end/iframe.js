@@ -58,15 +58,15 @@ function searchAllSites() {
         'fr-wiktionary-iframe': `https://fr.wiktionary.org/wiki/${encodeURIComponent(word)}`,
         'etymonline-iframe': `https://www.etymonline.com/search?q=${encodeURIComponent(word)}`,
         'dict-iframe': `https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8/${encodeURIComponent(word)}`,
-        'fr-wikipedi-iframe': `https://fr.wikipedia.org/wiki/${encodeURIComponent(word)}`
+        'fr-wikipedia-iframe': `https://fr.wikipedia.org/wiki/${encodeURIComponent(word)}`
     };
     if (word) {
-        document.querySelectorAll('.search-iframe').forEach(iframe => {
+        document.querySelectorAll('.dynamic-iframe').forEach(iframe => {
         const key = [...iframe.classList].find(c => urls[c]);
         iframe.src = word && key ? urls[key] : '';
     });
     } else {
-        document.querySelectorAll('.search-iframe').forEach(iframe => {
+        document.querySelectorAll('.dynamic-iframe').forEach(iframe => {
         iframe.src = '';
     });
     return;

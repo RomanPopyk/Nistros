@@ -14,15 +14,14 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #000000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-
-/* Container class for layout */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+/* Style for the main container */
+main {
+    flex: 1; /* Allow the main container to grow and fill available space */
 }
-
 /* Basic styling for headings */
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 20px;
@@ -72,8 +71,6 @@ footer {
     background-color: #bab4b4;
     color: #fff;
     width: 100%;
-    position: absolute;
-    bottom: 0;
 }
 /* Style for favicon */
 link[rel="icon"] {
