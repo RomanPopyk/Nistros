@@ -5,37 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English</title>
     <script>
-        // This script block handles the conditional loading of the main application script (iframes.js).
-        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
-        (function() {
-            const githubBasePath = '/Nistros/';
-            const localBasePath = '/'; // For local development, root-relative paths work as is
+    /* Function to conditionally fix paths for GitHub Pages hosting.
+* It prepends '.' to relative src or href attributes of elements
+* with the 'js-path-fixer' class, ONLY if the website is hosted on GitHub Pages.
+*/
+const applyPathFixer = () => {
+// The base path (your GitHub repository name)
+    const basePath = '/Nistros/'; 
+// Check if the current host is a GitHub Pages domain
+    const isGitHubPages =   window.location.hostname.endsWith('.github.io') || 
+                        window.location.hostname.includes('github.io'); // More robust check
 
-            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
-                                  window.location.hostname.includes('github.io');
+    if (!isGitHubPages) {
+        console.log("Not on GitHub Pages, skipping path fixing.");
+        return; // Exit if not on GitHub Pages
+    }
 
-            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
+    // Select all elements marked for path fixing
+    const elementsToFix = document.querySelectorAll('.js-path-fixer');
 
-            if (isGitHubPages) {
-                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
-                scriptPath = githubBasePath + scriptPath.substring(1); 
-                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
-            } else {
-                console.log(`Loading iframes.js from local path: ${scriptPath}`);
-            }
+    elementsToFix.forEach(element => {
+        let originalPath = '';
+        let attributeName = '';
 
-            const script = document.createElement('script');
-            script.src = scriptPath;
-            script.onload = () => {
-                console.log('iframes.js loaded successfully.');
-                // If iframes.js has an initialization function, you could call it here.
-                // For this example, assuming its content runs on DOMContentLoaded.
-            };
-            script.onerror = () => {
-                console.error(`Failed to load iframes.js from: ${scriptPath}`);
-            };
-            document.head.appendChild(script); // Append to head or body
-        })(); // Self-executing function to keep scope clean
+        // Determine if the element uses 'src' or 'href'
+        if (element.hasAttribute('src')) {
+            originalPath = element.getAttribute('src');
+            attributeName = 'src';
+        } else if (element.hasAttribute('href')) {
+            originalPath = element.getAttribute('href');
+            attributeName = 'href';
+        }
+
+        // Only apply the fix if:
+        // 1. The path exists.
+        // 2. It starts with '/' (is a root-relative path).
+        // 3. It's not already an absolute URL (http/https/double-slash).
+        // 4.  It doesn't already have the basePath prepended.
+        if (originalPath && attributeName && originalPath.startsWith('/') &&
+            !originalPath.startsWith('http://') && !originalPath.startsWith('https://') &&
+            !originalPath.startsWith('//') && !originalPath.startsWith(basePath)) {
+            
+            // Prepend the basePath. Remove the leading '/' from originalPath to avoid '//'
+            element.setAttribute(attributeName, basePath + originalPath.substring(1));
+            console.log(`Path fixed for ${attributeName}: ${originalPath} -> ${element.getAttribute(attributeName)}`);
+        }
+    });
+};
+// Apply path fixer on initial load
+    applyPathFixer();
     </script>
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg" class="js-path-fixer">
@@ -111,7 +129,7 @@
                 <iframe class="dynamic-iframe" data-target-site="en-wikipedia" src="https://en.wikipedia.org/wiki" title="English Wikipedia"></iframe>
         </section>
     </main>
-    <script src="/Nistros/back-end/path-fixer.js"></script>
+    <!-- <script src="/Nistros/back-end/path-fixer.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
     <script src="/back-end/iframes.js" class="js-path-fixer"></script>
 </body>
