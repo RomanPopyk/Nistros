@@ -53,10 +53,22 @@ button:hover {
     background-color: #0056b3;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    background-color: #03ecf8;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .title {
     font-size: 30px;
     font-weight: bold;
-    margin: 20px;
+    margin: 0;
     text-align: center;
     background-color: #03ecf8;
     border-radius: 10px;
@@ -82,7 +94,7 @@ link[rel="icon"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
 }
 #description-homepage {
     text-align: center;
@@ -384,6 +396,51 @@ link[rel="icon"] {
     .tab-button {
         padding: 10px 15px;
         font-size: 14px;
+    }
+    /* Adjustments for the homepage title and buttons */
+    .title {
+        font-size: 24px; /* Smaller font size for title */
+        margin: 15px;
+    }
+
+    .language-selection-container button {
+        width: 100%; /* Make buttons full width */
+        margin: 5px 0; /* Adjust margin for stacked buttons */
+        padding: 12px 0; /* Slightly more vertical padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px; /* Even smaller font size for very small screens */
+        padding: 8px;
+    }
+
+    #description-homepage {
+        font-size: 16px;
+        margin: 15px 10px;
+    }
+
+    .language-selection-container {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        gap: 10px;
+    }
+
+    .language-selection-container button {
+        padding: 10px 0; /* Adjust padding for stacked buttons */
+    }
+
+    /* Adjustments for the main header icon and title on very small screens */
+    header a {
+        position: static; /* Remove absolute positioning */
+        display: block; /* Make it a block element to center or adjust easily */
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    header img {
+        width: 40px; /* Slightly smaller icon */
+        height: 40px;
     }
 }
 
