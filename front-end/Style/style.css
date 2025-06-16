@@ -55,24 +55,27 @@ button:hover {
 
 header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    align-content: center;
     gap: 10px;
     background-color: #03ecf8;
-    padding: 20px;
-    text-align: center;
+    padding: 25px 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.header-title-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
 .title {
     font-size: 30px;
     font-weight: bold;
     margin: 0;
     text-align: center;
+    flex-grow: 1;
     background-color: #03ecf8;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
 }
@@ -89,6 +92,16 @@ link[rel="icon"] {
     width: 1px;
     height: 32px;
     border-radius: 80%;
+}
+.home-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-icon {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
 }
 .language-selection-container {
     display: flex;
@@ -246,7 +259,7 @@ link[rel="icon"] {
 .iframe-layout-controls {
     background: white;
     padding: 0px 40px;
-    margin: 0 20px 0px;
+    margin: 0px 20px 0px;
     border-bottom: 1px solid #c1c2c3;
     border-radius: 12px 12px 0 0;
     box-shadow: 0px 2px 0px rgba(0,0,0,0.05);
@@ -373,8 +386,12 @@ link[rel="icon"] {
 }
 /* Responsive Design */
 @media (max-width: 768px) {
+    header {
+        padding: 17px 20px; /* Reduce padding for header */
+    }
+
     .iframe-layout-controls {
-        margin: 0 10px 15px;
+        margin: 0 10px 0;
         padding: 12px 15px;
     }
     
@@ -382,6 +399,7 @@ link[rel="icon"] {
     .iframe-grid,
     .iframe-single {
         margin: 0 10px;
+        padding-bottom: 0;
     }
     
     .iframe-grid {
@@ -400,7 +418,11 @@ link[rel="icon"] {
     /* Adjustments for the homepage title and buttons */
     .title {
         font-size: 24px; /* Smaller font size for title */
-        margin: 15px;
+        margin: 5px;
+    }
+
+    .language-selection-container {
+        gap: 5px;
     }
 
     .language-selection-container button {
@@ -430,6 +452,10 @@ link[rel="icon"] {
         padding: 10px 0; /* Adjust padding for stacked buttons */
     }
 
+    header {
+        padding: 10px 15px; /* Reduce padding for header */
+    }
+
     /* Adjustments for the main header icon and title on very small screens */
     header a {
         position: static; /* Remove absolute positioning */
@@ -441,6 +467,31 @@ link[rel="icon"] {
     header img {
         width: 40px; /* Slightly smaller icon */
         height: 40px;
+    }
+
+    .tab-container,
+    .iframe-grid {
+        margin: 0 10px;
+        
+    }
+
+    .iframe-layout-controls {
+        margin: 0 10px 0;
+        padding: 12px 15px;
+    }
+
+    .iframe-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .tab-header {
+        padding: 0 5px;
+    }
+    
+    .tab-button {
+        padding: 10px 15px;
+        font-size: 14px;
     }
 }
 
