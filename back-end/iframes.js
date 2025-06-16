@@ -12,16 +12,32 @@ document.addEventListener('DOMContentLoaded', () => {
         let encodedSearchTerm = encodeURIComponent(processedSearchTerm);
 
         switch (siteName) {
+            case 'de-wiktionary':
+                return `https://de.wiktionary.org/wiki/${encodedSearchTerm}`;
             case 'en-wiktionary':
                 return `https://en.wiktionary.org/wiki/${encodedSearchTerm}`;
             case 'fr-wiktionary':
                 return `https://fr.wiktionary.org/wiki/${encodedSearchTerm}`;
+            case 'sk-wiktionary':
+                return `https://sk.wiktionary.org/wiki/${encodedSearchTerm}`;
             case 'etymonline':
                 return `https://www.etymonline.com/search?q=${encodedSearchTerm}`;
+            case 'dict-de-ua':
+                return `https://dict.com/%D0%BD%D1%96%D0%BC%D0%B5%D1%86%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8/${encodedSearchTerm}`;
+            case 'dict-en-ua':
+                return `https://dict.com/%D0%B0%D0%BD%D0%B3%D0%BB%D1%96%D0%B8%D1%81%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8/${encodedSearchTerm}`;
             case 'dict-fr-ua':
                 return `https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8/${encodedSearchTerm}`;
+            case 'dict-sk-ua':
+                return `https://dict.com/%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%86%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8/${encodedSearchTerm}`;
+            case 'de-wikipedia':
+                return `https://de.wikipedia.org/wiki/${encodedSearchTerm}`;
+            case 'en-wikipedia':
+                return `https://en.wikipedia.org/wiki/${encodedSearchTerm}`;
             case 'fr-wikipedia':
                 return `https://fr.wikipedia.org/wiki/${encodedSearchTerm}`;
+            case 'sk-wikipedia':
+                return `https://sk.wikipedia.org/wiki/${encodedSearchTerm}`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
