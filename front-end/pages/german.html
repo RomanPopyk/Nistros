@@ -4,6 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>German</title>
+        <script>
+        // This script block handles the conditional loading of the main application script (iframes.js).
+        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
+        (function() {
+            const githubBasePath = '/Nistros/';
+            const localBasePath = '/'; // For local development, root-relative paths work as is
+
+            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
+                                  window.location.hostname.includes('github.io');
+
+            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
+
+            if (isGitHubPages) {
+                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
+                scriptPath = githubBasePath + scriptPath.substring(1); 
+                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
+            } else {
+                console.log(`Loading iframes.js from local path: ${scriptPath}`);
+            }
+
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = () => {
+                console.log('iframes.js loaded successfully.');
+                // If iframes.js has an initialization function, you could call it here.
+                // For this example, assuming its content runs on DOMContentLoaded.
+            };
+            script.onerror = () => {
+                console.error(`Failed to load iframes.js from: ${scriptPath}`);
+            };
+            document.head.appendChild(script); // Append to head or body
+        })(); // Self-executing function to keep scope clean
+    </script>
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg" class="js-path-fixer">
 </head>
@@ -103,41 +136,8 @@
             style="border: 1px solid #ccc; overflow: auto;">
         </iframe>
     </div>
-     <script>
-        // This script block handles the conditional loading of the main application script (iframes.js).
-        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
-        (function() {
-            const githubBasePath = '/Nistros/';
-            const localBasePath = '/'; // For local development, root-relative paths work as is
-
-            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
-                                  window.location.hostname.includes('github.io');
-
-            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
-
-            if (isGitHubPages) {
-                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
-                scriptPath = githubBasePath + scriptPath.substring(1); 
-                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
-            } else {
-                console.log(`Loading iframes.js from local path: ${scriptPath}`);
-            }
-
-            const script = document.createElement('script');
-            script.src = scriptPath;
-            script.onload = () => {
-                console.log('iframes.js loaded successfully.');
-                // If iframes.js has an initialization function, you could call it here.
-                // For this example, assuming its content runs on DOMContentLoaded.
-            };
-            script.onerror = () => {
-                console.error(`Failed to load iframes.js from: ${scriptPath}`);
-            };
-            document.head.appendChild(script); // Append to head or body
-        })(); // Self-executing function to keep scope clean
-    </script>
     <script src="/Nistros/back-end/path-fixer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-    <script src="/back-end/iframes.js" class="js-path-fixer"></script>
+    <script src="/back-end/iframes.js" class="js-path-fixer" defer></script>
 </body>
 </html>
