@@ -4,42 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English</title>
-    <!-- Ultra-fast selective path fixer - runs immediately -->
     <script>
+        // This script block handles the conditional loading of the main application script (iframes.js).
+        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
         (function() {
-            'use strict';
-            const basePath = '/Nistros/';
+            const githubBasePath = '/Nistros/';
+            const localBasePath = '/'; // For local development, root-relative paths work as is
+
             const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
                                   window.location.hostname.includes('github.io');
 
-            if (!isGitHubPages) return;
+            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
 
-            // Fast path fixing function
-            window.fixSelectivePaths = function() {
-                const elementsToFix = document.querySelectorAll('.js-path-fixer');
-                elementsToFix.forEach(element => {
-                    let originalPath = '';
-                    let attributeName = '';
+            if (isGitHubPages) {
+                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
+                scriptPath = githubBasePath + scriptPath.substring(1); 
+                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
+            } else {
+                console.log(`Loading iframes.js from local path: ${scriptPath}`);
+            }
 
-                    if (element.hasAttribute('src')) {
-                        originalPath = element.getAttribute('src');
-                        attributeName = 'src';
-                    } else if (element.hasAttribute('href')) {
-                        originalPath = element.getAttribute('href');
-                        attributeName = 'href';
-                    }
-
-                    if (originalPath && attributeName && originalPath.startsWith('/') &&
-                        !originalPath.startsWith('http://') && !originalPath.startsWith('https://') &&
-                        !originalPath.startsWith('//') && !originalPath.startsWith(basePath)) {
-                        
-                        element.setAttribute(attributeName, basePath + originalPath.substring(1));
-                    }
-                });
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = () => {
+                console.log('iframes.js loaded successfully.');
+                // If iframes.js has an initialization function, you could call it here.
+                // For this example, assuming its content runs on DOMContentLoaded.
             };
-        })();
+            script.onerror = () => {
+                console.error(`Failed to load iframes.js from: ${scriptPath}`);
+            };
+            document.head.appendChild(script); // Append to head or body
+        })(); // Self-executing function to keep scope clean
     </script>
-    
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg" class="js-path-fixer">
     
