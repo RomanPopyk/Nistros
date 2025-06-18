@@ -1,5 +1,3 @@
-/* Basic CSS Setup */
-
 /* Reset some default browser styles */
 * {
     margin: 0;
@@ -53,14 +51,29 @@ button:hover {
     background-color: #0056b3;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #03ecf8;
+    padding: 15px 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-title-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
 .title {
     font-size: 30px;
     font-weight: bold;
-    margin: 20px;
+    margin: 0;
     text-align: center;
+    flex-grow: 1;
     background-color: #03ecf8;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
 }
@@ -78,12 +91,23 @@ link[rel="icon"] {
     height: 32px;
     border-radius: 80%;
 }
+.home-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-icon {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+}
 .language-selection-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
 }
+
 #description-homepage {
     text-align: center;
     margin: 20px 0;
@@ -100,7 +124,7 @@ link[rel="icon"] {
     gap: 10px;
     width: 100%;
     max-width: 400px;
-    margin: 20px auto;
+    margin: 17px auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -172,12 +196,6 @@ link[rel="icon"] {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-/* Style for the iframe container */
-.iframe-container {
-    display: flex; 
-    justify-content: space-between; 
-    margin-top: 10px;
-}
 /* Style for the tooltips */
 .fancy-tooltip {
     position: relative;
@@ -234,7 +252,7 @@ link[rel="icon"] {
 .iframe-layout-controls {
     background: white;
     padding: 0px 40px;
-    margin: 0 20px 0px;
+    margin: 0px 20px 0px;
     border-bottom: 1px solid #c1c2c3;
     border-radius: 12px 12px 0 0;
     box-shadow: 0px 2px 0px rgba(0,0,0,0.05);
@@ -345,6 +363,10 @@ link[rel="icon"] {
     height: 400px;
 }
 
+.iframe-card:first-child {
+    border-radius: 0 0 12px 12px;
+}
+
 .iframe-card-header {
     background: #f8f9fa;
     padding: 5px 15px;
@@ -360,18 +382,122 @@ link[rel="icon"] {
     border: none;
 }
 /* Responsive Design */
+@media (min-width:769px){
+    .iframe-card:nth-child(2) {
+        border-radius: 0 0 12px 12px;
+    }
+}
 @media (max-width: 768px) {
+    header {
+        padding: 7px 15px; /* Reduce padding for header */
+    }
+
+    header img {
+        width: 40px; /* Slightly smaller icon */
+        height: 40px;
+    }
+
+    .search-container{
+        margin: 12px auto;
+    }
+
     .iframe-layout-controls {
-        margin: 0 10px 15px;
-        padding: 12px 15px;
+        margin: 0 10px 0;
+        padding: 0 40px;
     }
     
     .tab-container,
     .iframe-grid,
     .iframe-single {
         margin: 0 10px;
+        padding-bottom: 0;
     }
     
+    .iframe-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .tab-header {
+        padding: 0 5px;
+    }
+    
+    .tab-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    /* Adjustments for the homepage title and buttons */
+    .title {
+        font-size: 24px; /* Smaller font size for title */
+        margin: 5px;
+    }
+
+    .language-selection-container {
+        gap: 5px;
+        padding: 0 20px; /* Add padding for better spacing */
+    }
+
+    .language-selection-container button {
+        width: 100%; /* Make buttons full width */
+        margin: 5px 0; /* Adjust margin for stacked buttons */
+        padding: 12px 0; /* Slightly more vertical padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px; /* Even smaller font size for very small screens */
+        padding: 8px;
+    }
+
+    #description-homepage {
+        font-size: 16px;
+        margin: 15px 10px;
+    }
+
+    .language-selection-container {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        gap: 10px;
+        margin: 10px 0; /* Center the buttons */
+        padding: 0 20px; /* Add padding for better spacing */
+    }
+
+    .language-selection-container button {
+        padding: 10px 0px; /* Adjust padding for stacked buttons */
+    }
+
+    header {
+        padding: 0px 10px; /* Reduce padding for header */
+    }
+
+    /* Adjustments for the main header icon and title on very small screens */
+    header a {
+        position: static; /* Remove absolute positioning */
+        display: block; /* Make it a block element to center or adjust easily */
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    header img {
+        width: 30px; /* Slightly smaller icon */
+        height: 30px;
+    }
+
+    .search-container{
+        margin: 10px auto;
+    }
+
+    .tab-container,
+    .iframe-grid {
+        margin: 0 10px;
+        
+    }
+
+    .iframe-layout-controls {
+        margin: 0 10px 0;
+        padding: 0 20px;
+    }
+
     .iframe-grid {
         grid-template-columns: 1fr;
         gap: 15px;

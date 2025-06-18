@@ -47,3 +47,15 @@ const applyPathFixer = () => {
 };
 // Apply path fixer on initial load
 applyPathFixer();
+
+window.addEventListener('load', function() {
+    // Check if we've already refreshed
+    if (!sessionStorage.getItem('hasRefreshed')) {
+        // Mark that we're about to refresh
+        sessionStorage.setItem('hasRefreshed', 'true');
+        
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+    }
+});

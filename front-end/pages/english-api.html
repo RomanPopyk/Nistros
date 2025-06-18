@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English</title>
+    <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
+    <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg" class="js-path-fixer">
+</head>
+<body>
+    <header>
+        <a href="/index.html" style="position: relative; top: 15px; left: 15px;" class="js-path-fixer">
+        <img src="/front-end/favicon500x500.jpeg" alt="Home_Icon" style="width: 50px; height: 50px;" class="js-path-fixer">
+        </a>
+        <h1 class="title">Search English words</h1>
+    </header>
+    <div class="search-container">
+        <!-- <label for="search-input">Search:</label> /Label just in case -->
+        <div class="search-input-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Enter a word">
+            <button id="search-button" onclick="fetchEtym()">Search</button>
+        </div>
+    </div>
+    <div id="results-container">
+        <h2>Results:</h2>
+        <p id="no-results-message" style="display: none;">No results found.</p>
+        <p id="loading-message" style="display: none;">Loading...</p>
+        <p id="error-message" style="display: none;">An error occurred while fetching results.</p>
+        <p id="searching-message" style="display: none;">Searching...</p>
+        <p id="search-complete-message" style="display: none;">Search complete.</p>
+        <div id="results-list">
+            <!-- Search results will be displayed here -->
+            <div class="wiktionary-results">
+                <div id="wiktionary-etymology"></div>
+                <div id="IPA"></div>
+                <ul id="wiktionary-definitions">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="etymonline-results">
+                <div id="etymonline-word"></div>
+                <div></div>
+            </div>
+            <div class="glosbe-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="e2u-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dict.com-results">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="wikipedia-results">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // This script block handles the conditional loading of the main application script (iframes.js).
+        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
+        (function() {
+            const githubBasePath = '/Nistros/';
+            const localBasePath = '/'; // For local development, root-relative paths work as is
+
+            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
+                                  window.location.hostname.includes('github.io');
+
+            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
+
+            if (isGitHubPages) {
+                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
+                scriptPath = githubBasePath + scriptPath.substring(1); 
+                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
+            } else {
+                console.log(`Loading iframes.js from local path: ${scriptPath}`);
+            }
+
+            const script = document.createElement('script');
+            script.src = scriptPath;
+            script.onload = () => {
+                console.log('iframes.js loaded successfully.');
+                // If iframes.js has an initialization function, you could call it here.
+                // For this example, assuming its content runs on DOMContentLoaded.
+            };
+            script.onerror = () => {
+                console.error(`Failed to load iframes.js from: ${scriptPath}`);
+            };
+            document.head.appendChild(script); // Append to head or body
+        })(); // Self-executing function to keep scope clean
+    </script>
+    <script src="/Nistros/back-end/path-fixer.js"></script>
+    <script src="/back-end/app.js" class="js-path-fixer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="/back-end/iframes.js" class="js-path-fixer"></script>
+</body>
+</html>
