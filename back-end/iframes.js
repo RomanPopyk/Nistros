@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent form submission if inside a form
+                searchInput.blur();
                 updateIframes();
             }
         });
