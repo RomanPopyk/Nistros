@@ -132,3 +132,35 @@ function switchTab(tabClass, clickedButton) {
     }
 }
 window.switchTab = switchTab;
+
+document.addEventListener('DOMContentLoaded', () =>{
+    // Get references to the clickable link and the collapsible bar
+    const moreOptionsLink = document.querySelector('.more-options-link');
+    const collapsibleMoreBar = document.querySelector('.collapsible-more-bar');
+
+    // Check if both elements exist before adding event listeners
+    if (moreOptionsLink && collapsibleMoreBar) {
+        // Add click event listener to the 'More' link
+        moreOptionsLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior (e.g., jumping to top)
+            // Toggle the 'show' class on the collapsible bar
+            collapsibleMoreBar.classList.toggle('show');
+        });
+
+        // Optional: Add a click listener to the document to close the bar
+        // when clicking anywhere outside of the trigger or the bar itself
+        document.addEventListener('click', function(event) {
+            const isClickInsideTrigger = moreOptionsLink.contains(event.target);
+            const isClickInsideBar = collapsibleMoreBar.contains(event.target);
+
+            // If the click is outside both the trigger and the bar, and the bar is currently open
+            if (!isClickInsideTrigger && !isClickInsideBar && collapsibleMoreBar.classList.contains('show')) {
+                collapsibleMoreBar.classList.remove('show'); // Hide the bar
+            }
+        });
+    } else {
+                console.error("Error: Could not find one or both elements for collapsible menu. Check HTML class names.");
+                if (!moreOptionsLink) console.error("Missing .more-options-link-trigger");
+                if (!collapsibleMoreBar) console.error("Missing .collapsible-more-bar");
+    }
+});
