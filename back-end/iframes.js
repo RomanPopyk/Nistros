@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://fr.wikipedia.org/wiki/${encodedSearchTerm}`;
             case 'sk-wikipedia':
                 return `https://sk.wikipedia.org/wiki/${encodedSearchTerm}`;
+            case 'glosbe-fr-ua':
+                return `https://glosbe.com/fr/uk/${encodedSearchTerm}`;
+            case 'conjugation-fr':
+                return `https://conjugation-fr.com/conjugate.php?verb=${encodedSearchTerm}`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
@@ -133,6 +137,9 @@ function switchTab(tabClass, clickedButton) {
 }
 window.switchTab = switchTab;
 
+
+// Collapsible bar functionality
+// This script handles the collapsible bar functionality for the 'More' options link
 document.addEventListener('DOMContentLoaded', () =>{
     // Get references to the clickable link and the collapsible bar
     const moreOptionsLink = document.querySelector('.more-options-link');
@@ -163,4 +170,18 @@ document.addEventListener('DOMContentLoaded', () =>{
                 if (!moreOptionsLink) console.error("Missing .more-options-link-trigger");
                 if (!collapsibleMoreBar) console.error("Missing .collapsible-more-bar");
     }
+});
+
+//Clear search input on button click
+const inputToClear = document.getElementById('search-input');
+const clearBtn = document.getElementById('clear-button');
+
+inputToClear.addEventListener('input', () => {
+clearBtn.style.display = inputToClear.value ? 'block' : 'none';
+});
+
+clearBtn.addEventListener('click', () => {
+inputToClear.value = '';
+clearBtn.style.display = 'none';
+inputToClear.focus(); // Optional: bring back focus
 });
