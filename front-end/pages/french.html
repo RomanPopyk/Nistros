@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>French</title>
+    <title>French | Nistros</title>
     <script>
         // This script block handles the conditional loading of the main application script (iframes.js).
         // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
@@ -50,12 +50,51 @@
         <div class="header-title-container">
             <h1 class="title">Search French words</h1>
         </div>
+        <div class="collapsible-menu-trigger">
+            <a href="#" class="additional-websites-link more-options-link js-path-fixer">
+                <img src="/images/external-link-icon-1200x1200.png" alt="Additional websites" class="additional-websites-icon js-path-fixer">
+                <span>More</span>
+            </a>
+        </div>
+        <div class="collapsible-menu-trigger">
+            <a href="#" class="additional-websites-link js-path-fixer">
+                <img src="/images/settings-icon-490-500.png" alt="Settings" class="settings-icon js-path-fixer">
+                <span>Settings</span>
+            </a>
+        </div>
     </header>
+    <nav>
+        <div class="collapsible-more-bar">
+            <div class="collapsible-content">
+                <a href="https://glosbe.com/fr/uk/" target="_blank" class="collapsible-icon-link" data-target-site="glosbe-fr-ua">
+                    <img src="/images/glosbe-logo.png" alt="Glosbe" class="collapsible-icon js-path-fixer">
+                    <span class="">Glosbe</span>
+                </a>
+                <a href="https://context.reverso.net/translation/french-ukrainian" target="_blank" class="collapsible-icon-link" data-target-site="reverso-fr-ua">
+                    <img src="/images/reverso-icon-512x512.png" alt="Reverso" class="collapsible-icon js-path-fixer">
+                    <span class="">Reverso</span>
+                </a>
+                <a href="https://e2u.org.ua/" target="_blank" class="collapsible-icon-link" data-target-site="e2u">
+                    <img src="/images/e2u-logo.png" alt="E2U" class="collapsible-icon js-path-fixer">
+                    <span class="">E2U</span>
+                </a>
+                 <a href="https://forvo.com/" target="_blank" class="collapsible-icon-link" data-target-site="forvo">
+                    <img src="/images/forvo-icon-1875x1875.png" alt="Forvo" class="collapsible-icon js-path-fixer">
+                    <span class="">Forvo</span>
+                </a>
+                <a href="https://www.google.com/search?udm=2&q=apple site:.fr" target="_blank" class="collapsible-icon-link" data-target-site="google-images-fr">
+                    <img src="/images/google-images-icon-256x256.png" alt="Google Images" class="collapsible-icon js-path-fixer">
+                    <span class="">Google Images</span>
+                </a>
+            </div>
+        </div>
+    </nav>
     <main>
         <section class="search-container">
             <div class="search-input-container">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="search-input" class="search-field" placeholder="Enter a word">
+                <button id="clear-button" class="clear-button" aria-label="Clear input">✕</button>
                 <button id="search-button" class="update-button">Search</button>
             </div>
         </section>
@@ -76,8 +115,9 @@
                 <button class="tab-button active" onclick="switchTab('en-wiktionary-tab', this)">📚 EN Wiktionary</button>
                 <button class="tab-button" onclick="switchTab('fr-wiktionary-tab', this)">📖 FR Wiktionary</button>
                 <button class="tab-button" onclick="switchTab('dict-fr-ua-tab', this)">🔤 Dict.com</button>
-                <button class="tab-button" onclick="switchTab('etymonline-tab', this)">🌱 Etymology</button>
+                <button class="tab-button" onclick="switchTab('etymonline-tab', this)">🌱 Etymonline</button>
                 <button class="tab-button" onclick="switchTab('fr-wikipedia-tab', this)">🌐 FR Wikipedia</button>
+                <button class="tab-button" onclick="switchTab('conjugation-fr-tab', this)">Conjugation</button>
             </div>
             
             <div class="en-wiktionary-tab tab-content active">
@@ -94,6 +134,9 @@
             </div>
             <div class="fr-wikipedia-tab tab-content">
                 <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
+            </div>
+            <div class="conjugation-fr-tab tab-content">
+                <iframe class="dynamic-iframe" data-target-site="conjugation-fr" src="https://www.conjugation-fr.com/index.html" title="Conjugation"></iframe>
             </div>
         </section>
         <!-- Grid Layout -->
@@ -117,6 +160,11 @@
             <div class="iframe-card">
                 <div class="iframe-card-header">🌐 French Wikipedia</div>
                 <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
+            </div>
+            <div class="iframe-card">
+                <div class="iframe-card-header">Conjugation</div>
+                <iframe class="dynamic-iframe" data-target-site="conjugation-fr" src="https://www.conjugation-fr.com/index.html" title="Conjugation"></iframe>
+            </div>
         </section>
     </main>
     <script src="/Nistros/back-end/path-fixer.js"></script>

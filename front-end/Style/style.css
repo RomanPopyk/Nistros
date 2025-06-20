@@ -96,11 +96,38 @@ link[rel="icon"] {
     justify-content: center;
     align-items: center;
 }
-.home-icon {
+.home-icon, .settings-icon, .additional-websites-icon {
     width: 50px;
     height: 50px;
     transition: transform 0.3s ease;
 }
+/* Collapsible bars */
+/* Specific styles for the collapsible bar animation */
+.collapsible-more-bar {
+    max-height: 0;          /* Initially hidden */
+    overflow: hidden;       /* Hide overflow content */
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background-color: #e5e7eb;
+    border-bottom: 1px solid #d1d5db; 
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
+    padding-left: 1rem;   
+    padding-right: 1rem;   
+    box-sizing: border-box; 
+}
+
+.collapsible-more-bar.show {
+    max-height: 200px; 
+    padding-top: 1rem;  
+    padding-bottom: 1rem; 
+}
+
+.collapsible-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
 .language-selection-container {
     display: flex;
     justify-content: center;
@@ -177,6 +204,21 @@ link[rel="icon"] {
 .search-input-container button:hover {
     background: linear-gradient(135deg, #566dd7, #21c3dc);
 }
+/* Clear search input button style*/
+#clear-button {
+    position: absolute;
+    right: 91px; /* Adjust as needed depending on button size */
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #000000;
+    display: none; /* Hidden by default */
+}
+#clear-button:hover {
+    color: #918c8c;
+}
+
 #results-container {
     display: flex;
     flex-direction: column;

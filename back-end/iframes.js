@@ -1,8 +1,10 @@
-// Update language iframes dynamically
+// Update links and text with search input dynamically
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search-field');
     const searchButton = document.querySelector('.update-button');
     const dynamicIframes = document.querySelectorAll('.dynamic-iframe');
+    const collapsibleLinks = document.querySelectorAll('.collapsible-icon-link');
+    const originalTitle = document.title;
 
     // Function to generate site-specific URLs
     const generateSiteUrl = (siteName, searchTerm) => {
@@ -38,6 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://fr.wikipedia.org/wiki/${encodedSearchTerm}`;
             case 'sk-wikipedia':
                 return `https://sk.wikipedia.org/wiki/${encodedSearchTerm}`;
+            case 'glosbe-fr-ua':
+                return `https://glosbe.com/fr/uk/${encodedSearchTerm}`;
+            case 'conjugation-fr':
+                return `https://conjugation-fr.com/conjugate.php?verb=${encodedSearchTerm}`;
+            case 'google-images-fr':
+                return `https://www.google.com/search?udm=2&q=${encodedSearchTerm}%20site:.fr`;
+            case 'google-images-sk':
+                return `https://www.google.com/search?udm=2&q=${encodedSearchTerm}%20site:.sk`;
+            case 'e2u':
+                return `https://e2u.org.ua/s?w=${encodedSearchTerm}&dicts=all&highlight=on&filter_lines=on`;
+            case 'reverso-fr-ua':
+                return `https://context.reverso.net/translation/french-ukrainian/${encodedSearchTerm}`;
+             case 'forvo':
+                return `https://forvo.com/search/${encodedSearchTerm}`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
@@ -48,13 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
      * Iterates through all dynamic iframes and updates their src attribute
      * based on the current search term.
      */
-    const updateIframes = () => {
+    const updateLinks = () => {
         const searchTerm = searchInput.value;
         if (!searchTerm || searchTerm.trim() === '') {
             alert("Please enter a search term.");
             return; 
         }
-
+        // Update iframe links
         dynamicIframes.forEach(iframe => {
             const targetSite = iframe.dataset.targetSite; // Access data-target-site attribute
             const newUrl = generateSiteUrl(targetSite, searchTerm);
@@ -63,22 +79,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 iframe.src = newUrl;
             }
         });
+        // Update external links
+        collapsibleLinks.forEach(a => {
+            const targetSite = a.dataset.targetSite; // Access data-target-site attribute
+            const newUrl = generateSiteUrl(targetSite, searchTerm);
+            // Update the external link only if a valid URL was generated.
+            if (newUrl) {
+                a.href = newUrl;
+            }
+        });
+        // Update the page title with the search term
+        updatePageTitle(searchTerm);
+    };
+    const updatePageTitle = (searchTerm) => {
+        if (searchTerm.trim() !== '') {
+            document.title = `${searchTerm} - ${originalTitle}`;
+        } else {
+            document.title = originalTitle; // Revert to original if search term is empty
+        }
     };
 
     // Event listener for search button click
     if (searchButton) {
-        searchButton.addEventListener('click', updateIframes);
-    }
+        searchButton.addEventListener('click', () => {
+        updateLinks();
+        });
+    };
 
     // Update on 'Enter' key press in search field
     if (searchInput) {
         searchInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent form submission if inside a form
-                updateIframes();
+                searchInput.blur();
+                updateLinks();
             }
         });
-    }
+    };
 });
 
 // Layout switching
@@ -131,3 +168,52 @@ function switchTab(tabClass, clickedButton) {
     }
 }
 window.switchTab = switchTab;
+
+
+// Collapsible bar functionality
+// This script handles the collapsible bar functionality for the 'More' options link
+document.addEventListener('DOMContentLoaded', () =>{
+    // Get references to the clickable link and the collapsible bar
+    const moreOptionsLink = document.querySelector('.more-options-link');
+    const collapsibleMoreBar = document.querySelector('.collapsible-more-bar');
+
+    // Check if both elements exist before adding event listeners
+    if (moreOptionsLink && collapsibleMoreBar) {
+        // Add click event listener to the 'More' link
+        moreOptionsLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior (e.g., jumping to top)
+            // Toggle the 'show' class on the collapsible bar
+            collapsibleMoreBar.classList.toggle('show');
+        });
+
+        // Optional: Add a click listener to the document to close the bar
+        // when clicking anywhere outside of the trigger or the bar itself
+        document.addEventListener('click', function(event) {
+            const isClickInsideTrigger = moreOptionsLink.contains(event.target);
+            const isClickInsideBar = collapsibleMoreBar.contains(event.target);
+
+            // If the click is outside both the trigger and the bar, and the bar is currently open
+            if (!isClickInsideTrigger && !isClickInsideBar && collapsibleMoreBar.classList.contains('show')) {
+                collapsibleMoreBar.classList.remove('show'); // Hide the bar
+            }
+        });
+    } else {
+                console.error("Error: Could not find one or both elements for collapsible menu. Check HTML class names.");
+                if (!moreOptionsLink) console.error("Missing .more-options-link-trigger");
+                if (!collapsibleMoreBar) console.error("Missing .collapsible-more-bar");
+    }
+});
+
+//Clear search input on button click
+const inputToClear = document.getElementById('search-input');
+const clearBtn = document.getElementById('clear-button');
+
+inputToClear.addEventListener('input', () => {
+clearBtn.style.display = inputToClear.value ? 'block' : 'none';
+});
+
+clearBtn.addEventListener('click', () => {
+inputToClear.value = '';
+clearBtn.style.display = 'none';
+inputToClear.focus(); // Optional: bring back focus
+});
