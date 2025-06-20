@@ -1,9 +1,10 @@
-// Update language iframes dynamically
+// Update links and text with search input dynamically
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search-field');
     const searchButton = document.querySelector('.update-button');
     const dynamicIframes = document.querySelectorAll('.dynamic-iframe');
     const collapsibleLinks = document.querySelectorAll('.collapsible-icon-link');
+    const originalTitle = document.title;
 
     // Function to generate site-specific URLs
     const generateSiteUrl = (siteName, searchTerm) => {
@@ -63,13 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
      * Iterates through all dynamic iframes and updates their src attribute
      * based on the current search term.
      */
-    const updateIframes = () => {
+    const updateLinks = () => {
         const searchTerm = searchInput.value;
         if (!searchTerm || searchTerm.trim() === '') {
             alert("Please enter a search term.");
             return; 
         }
-
+        // Update iframe links
         dynamicIframes.forEach(iframe => {
             const targetSite = iframe.dataset.targetSite; // Access data-target-site attribute
             const newUrl = generateSiteUrl(targetSite, searchTerm);
@@ -78,26 +79,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 iframe.src = newUrl;
             }
         });
-    };
-
-    const updateCollapsibleLinks = () => {
-        const searchTerm = searchInput.value;
-
+        // Update external links
         collapsibleLinks.forEach(a => {
             const targetSite = a.dataset.targetSite; // Access data-target-site attribute
             const newUrl = generateSiteUrl(targetSite, searchTerm);
-            // Update the iframe source only if a valid URL was generated.
+            // Update the external link only if a valid URL was generated.
             if (newUrl) {
                 a.href = newUrl;
             }
         });
+        // Update the page title with the search term
+        updatePageTitle(searchTerm);
+    };
+    const updatePageTitle = (searchTerm) => {
+        if (searchTerm.trim() !== '') {
+            document.title = `${searchTerm} - ${originalTitle}`;
+        } else {
+            document.title = originalTitle; // Revert to original if search term is empty
+        }
     };
 
     // Event listener for search button click
     if (searchButton) {
         searchButton.addEventListener('click', () => {
-        updateIframes();
-        updateCollapsibleLinks();
+        updateLinks();
         });
     };
 
@@ -107,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent form submission if inside a form
                 searchInput.blur();
-                updateIframes();
-                updateCollapsibleLinks();
+                updateLinks();
             }
         });
     };
