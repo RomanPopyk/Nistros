@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.querySelector('.search-field');
     const searchButton = document.querySelector('.update-button');
     const dynamicIframes = document.querySelectorAll('.dynamic-iframe');
+    const collapsibleLinks = document.querySelectorAll('.collapsible-icon-link');
 
     // Function to generate site-specific URLs
     const generateSiteUrl = (siteName, searchTerm) => {
@@ -42,6 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://glosbe.com/fr/uk/${encodedSearchTerm}`;
             case 'conjugation-fr':
                 return `https://conjugation-fr.com/conjugate.php?verb=${encodedSearchTerm}`;
+            case 'google-images-fr':
+                return `https://www.google.com/search?udm=2&q=${encodedSearchTerm}%20site:.fr`;
+            case 'google-images-sk':
+                return `https://www.google.com/search?udm=2&q=${encodedSearchTerm}%20site:.sk`;
+            case 'e2u':
+                return `https://e2u.org.ua/s?w=${encodedSearchTerm}&dicts=all&highlight=on&filter_lines=on`;
+            case 'reverso-fr-ua':
+                return `https://context.reverso.net/translation/french-ukrainian/${encodedSearchTerm}`;
+             case 'forvo':
+                return `https://forvo.com/search/${encodedSearchTerm}`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
@@ -69,10 +80,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const updateCollapsibleLinks = () => {
+        const searchTerm = searchInput.value;
+
+        collapsibleLinks.forEach(a => {
+            const targetSite = a.dataset.targetSite; // Access data-target-site attribute
+            const newUrl = generateSiteUrl(targetSite, searchTerm);
+            // Update the iframe source only if a valid URL was generated.
+            if (newUrl) {
+                a.href = newUrl;
+            }
+        });
+    };
+
     // Event listener for search button click
     if (searchButton) {
-        searchButton.addEventListener('click', updateIframes);
-    }
+        searchButton.addEventListener('click', () => {
+        updateIframes();
+        updateCollapsibleLinks();
+        });
+    };
 
     // Update on 'Enter' key press in search field
     if (searchInput) {
@@ -81,9 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.preventDefault(); // Prevent form submission if inside a form
                 searchInput.blur();
                 updateIframes();
+                updateCollapsibleLinks();
             }
         });
-    }
+    };
 });
 
 // Layout switching
