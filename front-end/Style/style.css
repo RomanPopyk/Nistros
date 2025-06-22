@@ -537,7 +537,7 @@ link[rel="icon"] {
     }
 
     header {
-        padding: 0; /* Reduce padding for header */
+        padding: 0 5px; /* Reduce padding for header */
         gap: 5px;
     }
 
@@ -593,4 +593,10 @@ link[rel="icon"] {
     height: 100%;
     color: #666;
     font-style: italic;
+}
+
+@media (min-width: 379px) and (max-width: 480px) {
+    header {
+        padding: 10px 7px;
+    }
 }
