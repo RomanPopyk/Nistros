@@ -96,10 +96,29 @@ link[rel="icon"] {
     justify-content: center;
     align-items: center;
 }
-.home-icon, .settings-icon, .additional-websites-icon {
+.home-icon, .settings-icon, .more-resources-icon {
     width: 50px;
     height: 50px;
     transition: transform 0.3s ease;
+}
+.more-resources-button-container a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: #000000;
+}
+.settings-button-container a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-decoration: none;
+    color: #000000;
+}
+.more-resources-button-container:hover, .settings-button-container:hover {
+    background-color: #0cdde8;
+    border-radius: 12px;
 }
 /* Collapsible bars */
 /* Specific styles for the collapsible bar animation */

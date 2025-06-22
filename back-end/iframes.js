@@ -174,7 +174,7 @@ window.switchTab = switchTab;
 // This script handles the collapsible bar functionality for the 'More' options link
 document.addEventListener('DOMContentLoaded', () =>{
     // Get references to the clickable link and the collapsible bar
-    const moreOptionsLink = document.querySelector('.more-options-link');
+    const moreOptionsLink = document.querySelector('.more-resources-link');
     const collapsibleMoreBar = document.querySelector('.collapsible-more-bar');
 
     // Check if both elements exist before adding event listeners
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         });
     } else {
                 console.error("Error: Could not find one or both elements for collapsible menu. Check HTML class names.");
-                if (!moreOptionsLink) console.error("Missing .more-options-link-trigger");
+                if (!moreOptionsLink) console.error("Missing .more-resources-link");
                 if (!collapsibleMoreBar) console.error("Missing .collapsible-more-bar");
     }
 });
