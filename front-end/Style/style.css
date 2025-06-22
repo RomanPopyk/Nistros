@@ -101,6 +101,15 @@ link[rel="icon"] {
     height: 43px;
     transition: transform 0.3s ease;
 }
+
+.more-resources-icon {
+    margin-bottom: 1px;
+}
+
+.settings-icon {
+    margin-top: 2px;
+}
+
 .more-resources-button-container a {
     display: flex;
     flex-direction: column;
@@ -528,19 +537,19 @@ link[rel="icon"] {
     }
 
     header {
-        padding: 0px 10px; /* Reduce padding for header */
+        padding: 0; /* Reduce padding for header */
         gap: 5px;
     }
 
     /* Adjustments for the main header icon and title on very small screens */
-    header a {
-        position: static; /* Remove absolute positioning */
-        display: block; /* Make it a block element to center or adjust easily */
+/*     header a {
+        position: static; 
+        display: block;
         text-align: center;
-        margin-top: 10px;
-    }
+    } */
 
     .home-icon, .settings-icon, .more-resources-icon {
+        align-self: center;
         width: 30px;
         height: 30px;
         transition: transform 0.3s ease;
