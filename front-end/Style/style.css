@@ -96,10 +96,38 @@ link[rel="icon"] {
     justify-content: center;
     align-items: center;
 }
-.home-icon, .settings-icon, .additional-websites-icon {
-    width: 50px;
-    height: 50px;
+.home-icon, .settings-icon, .more-resources-icon {
+    width: 43px;
+    height: 43px;
     transition: transform 0.3s ease;
+}
+
+.more-resources-icon {
+    margin-bottom: 1px;
+}
+
+.settings-icon {
+    margin-top: 2px;
+}
+
+.more-resources-button-container a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: #000000;
+}
+.settings-button-container a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    text-decoration: none;
+    color: #000000;
+}
+.more-resources-button-container:hover, .settings-button-container:hover {
+    background-color: #0cdde8;
+    border-radius: 12px;
 }
 /* Collapsible bars */
 /* Specific styles for the collapsible bar animation */
@@ -110,22 +138,96 @@ link[rel="icon"] {
     background-color: #e5e7eb;
     border-bottom: 1px solid #d1d5db; 
     box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
-    padding-left: 1rem;   
-    padding-right: 1rem;   
+    padding: 0 10px; 
     box-sizing: border-box; 
 }
 
 .collapsible-more-bar.show {
     max-height: 200px; 
-    padding-top: 1rem;  
-    padding-bottom: 1rem; 
+    padding: 8px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.collapsible-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.collapsible-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 7px 3px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgb(249, 246, 246);
+    border: 2px solid transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    min-width: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.collapsible-icon-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(164, 171, 175, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.collapsible-icon-link:hover::before {
+    left: 100%;
+}
+
+.collapsible-icon-link:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #007BFF;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    text-decoration: none;
+}
+
+.collapsible-icon-link:active {
+    transform: translateY(-2px) scale(1.02);
 }
 
 .collapsible-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    transition: transform 0.3s ease;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.collapsible-icon-link:hover .collapsible-icon {
+    transform: scale(1.05);
+    filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+}
+
+.collapsible-icon-link span {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.collapsible-icon-link:hover span {
+    color: #667eea;
+}
+
+.collapsible-more-bar.show .collapsible-icon-link {
+    animation: slideDown 0.4s ease forwards;
 }
 
 .language-selection-container {
@@ -134,7 +236,7 @@ link[rel="icon"] {
     align-items: center;
     width: 100vw;
 }
-
+/* Need this for the homepage */
 #description-homepage {
     text-align: center;
     margin: 20px 0;
@@ -425,6 +527,7 @@ link[rel="icon"] {
 }
 /* Responsive Design */
 @media (min-width:769px){
+    /* Removes top borders for the second grid card when the view is in column */
     .iframe-card:nth-child(2) {
         border-radius: 0 0 12px 12px;
     }
@@ -437,6 +540,24 @@ link[rel="icon"] {
     header img {
         width: 40px; /* Slightly smaller icon */
         height: 40px;
+    }
+
+    .collapsible-content {
+        gap: 12px;
+    }
+    
+    .collapsible-icon-link {
+        min-width: 70px;
+        padding: 8px 7px 3px;
+    }
+    
+    .collapsible-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .collapsible-icon-link span {
+        font-size: 12px;
     }
 
     .search-container{
@@ -509,20 +630,45 @@ link[rel="icon"] {
     }
 
     header {
-        padding: 0px 10px; /* Reduce padding for header */
+        padding: 0 5px; /* Reduce padding for header */
+        gap: 5px;
     }
 
     /* Adjustments for the main header icon and title on very small screens */
-    header a {
-        position: static; /* Remove absolute positioning */
-        display: block; /* Make it a block element to center or adjust easily */
+/*     header a {
+        position: static; 
+        display: block;
         text-align: center;
-        margin-top: 10px;
+    } */
+
+    .home-icon, .settings-icon, .more-resources-icon {
+        align-self: center;
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
     }
 
-    header img {
-        width: 30px; /* Slightly smaller icon */
-        height: 30px;
+    .collapsible-content {
+        gap: 8px;
+    }
+    
+    .collapsible-icon-link {
+        min-width: 60px;
+        padding: 6px 6px 4px;
+    }
+    
+    .collapsible-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .collapsible-icon-link span {
+        font-size: 12px;
+    }
+    
+    .collapsible-more-bar.show {
+        max-height: 200px;
+        padding: 8px;
     }
 
     .search-container{
@@ -563,4 +709,10 @@ link[rel="icon"] {
     height: 100%;
     color: #666;
     font-style: italic;
+}
+
+@media (min-width: 379px) and (max-width: 480px) {
+    header {
+        padding: 10px 7px;
+    }
 }

@@ -174,7 +174,7 @@ window.switchTab = switchTab;
 // This script handles the collapsible bar functionality for the 'More' options link
 document.addEventListener('DOMContentLoaded', () =>{
     // Get references to the clickable link and the collapsible bar
-    const moreOptionsLink = document.querySelector('.more-options-link');
+    const moreOptionsLink = document.querySelector('.more-resources-link');
     const collapsibleMoreBar = document.querySelector('.collapsible-more-bar');
 
     // Check if both elements exist before adding event listeners
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         });
     } else {
                 console.error("Error: Could not find one or both elements for collapsible menu. Check HTML class names.");
-                if (!moreOptionsLink) console.error("Missing .more-options-link-trigger");
+                if (!moreOptionsLink) console.error("Missing .more-resources-link");
                 if (!collapsibleMoreBar) console.error("Missing .collapsible-more-bar");
     }
 });
@@ -208,12 +208,20 @@ document.addEventListener('DOMContentLoaded', () =>{
 const inputToClear = document.getElementById('search-input');
 const clearBtn = document.getElementById('clear-button');
 
-inputToClear.addEventListener('input', () => {
-clearBtn.style.display = inputToClear.value ? 'block' : 'none';
-});
+// Function to update clear button visibility
+function updateClearButton() {
+    clearBtn.style.display = inputToClear.value ? 'block' : 'none';
+}
+// Listen for multiple events to catch all input changes
+inputToClear.addEventListener('input', updateClearButton);
+inputToClear.addEventListener('change', updateClearButton);
+inputToClear.addEventListener('autocomplete', updateClearButton);
+inputToClear.addEventListener('focus', updateClearButton);
 
 clearBtn.addEventListener('click', () => {
-inputToClear.value = '';
-clearBtn.style.display = 'none';
-inputToClear.focus(); // Optional: bring back focus
+    inputToClear.value = '';
+    clearBtn.style.display = 'none';
+    inputToClear.focus(); // Optional: bring back focus
 });
+// Initial check on page load
+updateClearButton();
