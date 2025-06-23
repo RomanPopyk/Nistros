@@ -208,12 +208,20 @@ document.addEventListener('DOMContentLoaded', () =>{
 const inputToClear = document.getElementById('search-input');
 const clearBtn = document.getElementById('clear-button');
 
-inputToClear.addEventListener('input', () => {
-clearBtn.style.display = inputToClear.value ? 'block' : 'none';
-});
+// Function to update clear button visibility
+function updateClearButton() {
+    clearBtn.style.display = inputToClear.value ? 'block' : 'none';
+}
+// Listen for multiple events to catch all input changes
+inputToClear.addEventListener('input', updateClearButton);
+inputToClear.addEventListener('change', updateClearButton);
+inputToClear.addEventListener('autocomplete', updateClearButton);
+inputToClear.addEventListener('focus', updateClearButton);
 
 clearBtn.addEventListener('click', () => {
-inputToClear.value = '';
-clearBtn.style.display = 'none';
-inputToClear.focus(); // Optional: bring back focus
+    inputToClear.value = '';
+    clearBtn.style.display = 'none';
+    inputToClear.focus(); // Optional: bring back focus
 });
+// Initial check on page load
+updateClearButton();
