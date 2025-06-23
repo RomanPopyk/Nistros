@@ -134,7 +134,7 @@ link[rel="icon"] {
 .collapsible-more-bar {
     max-height: 0;          /* Initially hidden */
     overflow: hidden;       /* Hide overflow content */
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.3s ease-out;
     background-color: #e5e7eb;
     border-bottom: 1px solid #d1d5db; 
     box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
@@ -147,6 +147,24 @@ link[rel="icon"] {
     padding: 8px 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+.collapsible-settings-bar {
+    max-height: 0;          /* Initially hidden */
+    overflow: hidden;       /* Hide overflow content */
+    transition: max-height 0.4s ease-out, padding 0.3s ease-out;
+    background-color: #e5e7eb;
+    border-bottom: 1px solid #d1d5db; 
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
+    padding: 0 10px; 
+    box-sizing: border-box; 
+}
+
+.collapsible-settings-bar.show {
+    max-height: 200px; 
+    padding: 8px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 
 .collapsible-content {
     display: flex;
@@ -226,9 +244,33 @@ link[rel="icon"] {
     color: #667eea;
 }
 
-.collapsible-more-bar.show .collapsible-icon-link {
+.collapsible-more-bar.show .collapsible-settings-bar.show .collapsible-icon-link {
     animation: slideDown 0.4s ease forwards;
 }
+
+/* Style for active (open) collapsible menu buttons */
+.more-resources-button-container.is-active,
+.settings-button-container.is-active {
+    background-color: #0cb1e8; /* A distinct background to indicate active state */
+    border-radius: 12px;
+    /* You can add more styles here, e.g., a subtle shadow, different text color */
+    box-shadow: 0 0 10px rgba(4, 104, 236, 0.3); /* Example: a blue glow */
+}
+
+/* Optional: Ensure the hover effect still works nicely when active */
+.more-resources-button-container.is-active:hover,
+.settings-button-container.is-active:hover {
+    background-color: #0fabdf; /* Slightly lighter on hover when active */
+    transform: translateY(-2px); /* Slightly more lift on hover */
+}
+
+/* Class to instantly hide/show bars without transition */
+.collapsible-more-bar.no-transition,
+.collapsible-settings-bar.no-transition {
+    transition: none !important; /* Overrides existing transitions when applied */
+}
+
+/* Style for the home page container */
 
 .language-selection-container {
     display: flex;
