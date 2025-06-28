@@ -189,7 +189,7 @@ link[rel="icon"] {
     min-width: 80px;
     position: relative;
     overflow: hidden;
-    -webkit-tap-highlight-border: 12px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .collapsible-icon-link::before {
@@ -218,7 +218,7 @@ link[rel="icon"] {
 
 .collapsible-icon-link:active {
     transform: translateY(-2px) scale(1.02);
-    -webkit-tap-highlight-border: 12px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .collapsible-icon {
