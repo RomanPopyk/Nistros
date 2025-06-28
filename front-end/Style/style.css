@@ -6,7 +6,7 @@
 }
 
 html {
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 /* Set default font and background for the body */
