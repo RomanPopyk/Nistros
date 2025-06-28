@@ -756,7 +756,8 @@ link[rel="icon"] {
     }
     
     .tab-button {
-        padding: 14px 15px;
+        margin: 0 2px;
+        padding: 12px 14px;
         font-size: 14px;
     }
 }
