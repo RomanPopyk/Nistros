@@ -83,23 +83,13 @@ header {
     background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
 }
 
-/* footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #bab4b4;
-    color: #fff;
-    width: 100%;
-} */
-
 footer {
     text-align: center;
     padding: 20px;
     background-color: #bab4b4;
     color: #fff;
     width: 100%;
-    position: sticky; /* Makes the footer stick to a position */
-    bottom: 0; /* Sticks it to the bottom of its containing block */
-    z-index: 10; /* Ensures it stays on top of other content if scrolled */
+    margin-top: 5px;
 }
 
 /* Style for favicon */
