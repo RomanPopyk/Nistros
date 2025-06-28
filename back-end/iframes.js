@@ -52,8 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://e2u.org.ua/s?w=${encodedSearchTerm}&dicts=all&highlight=on&filter_lines=on`;
             case 'reverso-fr-ua':
                 return `https://context.reverso.net/translation/french-ukrainian/${encodedSearchTerm}`;
-             case 'forvo':
+            case 'forvo':
                 return `https://forvo.com/search/${encodedSearchTerm}`;
+            case 'cnrtl-etymology':
+                return `https://www.cnrtl.fr/etymologie/${encodedSearchTerm}`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
