@@ -83,6 +83,11 @@ header {
     background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
 }
 
+.title:hover {
+    background: radial-gradient(circle, #007BFF 10%, #03ecf8 98%);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 footer {
     text-align: center;
     padding: 20px;
@@ -90,6 +95,7 @@ footer {
     color: #fff;
     width: 100%;
     margin-top: 5px;
+    cursor: default;
 }
 
 /* Style for favicon */
@@ -102,6 +108,10 @@ link[rel="icon"] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.home-icon-container:hover {
+    transform: scale(1.03);
 }
 .home-icon, .settings-icon, .more-resources-icon {
     width: 43px;
@@ -642,6 +652,7 @@ link[rel="icon"] {
     .title {
         font-size: 24px; /* Smaller font size for title */
         margin: 5px;
+        cursor: default;
     }
 
     .language-selection-container {
