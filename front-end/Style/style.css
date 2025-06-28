@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* Set default font and background for the body */
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -49,6 +53,10 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+button, a, input, select {
+    -webkit-tap-highlight-color: transparent;
 }
 
 header {
@@ -189,7 +197,6 @@ link[rel="icon"] {
     min-width: 80px;
     position: relative;
     overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .collapsible-icon-link::before {
@@ -218,7 +225,6 @@ link[rel="icon"] {
 
 .collapsible-icon-link:active {
     transform: translateY(-2px) scale(1.02);
-    -webkit-tap-highlight-color: transparent;
 }
 
 .collapsible-icon {
