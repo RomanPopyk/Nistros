@@ -118,6 +118,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+    // Add swipe functionality for tab navigation
+    const tabContainer = document.querySelector('.tab-container');
+    let touchstartX = 0;
+    let touchendX = 0;
+    const swipeThreshold = 75; // Minimum pixels to consider a swipe
+
+    if (tabContainer) {
+        tabContainer.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        tabContainer.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const currentActiveButton = document.querySelector('.tab-button.active');
+            const tabButtons = Array.from(document.querySelectorAll('.tab-button'));
+            const currentIndex = tabButtons.indexOf(currentActiveButton);
+
+            if (touchendX < touchstartX - swipeThreshold) {
+                // Swiped left (go to next tab)
+                if (currentIndex < tabButtons.length - 1) {
+                    const nextButton = tabButtons[currentIndex + 1];
+                    // Call your existing switchTab function
+                    switchTab(nextButton.classList[0], nextButton); // Pass the class and the button element
+                }
+            }
+
+            if (touchendX > touchstartX + swipeThreshold) {
+                // Swiped right (go to previous tab)
+                if (currentIndex > 0) {
+                    const prevButton = tabButtons[currentIndex - 1];
+                    // Call your existing switchTab function
+                    switchTab(prevButton.classList[0], prevButton); // Pass the class and the button element
+                }
+            }
+        }
+    } else {
+        console.error("Error: '.tab-container' not found for swipe functionality.");
+    };
 });
 
 // Layout switching
