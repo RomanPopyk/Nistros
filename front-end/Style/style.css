@@ -89,7 +89,9 @@ header {
 }
 
 footer {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
     background-color: #bab4b4;
     color: #fff;
@@ -584,6 +586,13 @@ link[rel="icon"] {
     height: 100%;
     border: none;
 }
+
+#copyright-container {
+    position: absolute;
+    left: 50%; /* Move its left edge to the horizontal center of the parent */
+    transform: translateX(-50%); /* Shift it back by half its own width to truly center it */
+    white-space: nowrap;
+}
 /* Responsive Design */
 @media (min-width:769px){
     /* Removes top borders for the second grid card when the view is in column */
@@ -671,6 +680,18 @@ link[rel="icon"] {
     .title {
         font-size: 20px; /* Even smaller font size for very small screens */
         padding: 8px;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column; /* Stack footer elements vertically */
+        padding: 10px;
+    }
+
+    #copyright-container {
+        position: static;
+        transform: none;
+        left: auto;
     }
 
     #description-homepage {
