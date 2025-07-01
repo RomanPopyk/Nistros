@@ -89,9 +89,7 @@ header {
 }
 
 footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     padding: 20px;
     background-color: #bab4b4;
     color: #fff;
@@ -536,6 +534,7 @@ link[rel="icon"] {
     display: none;
     height: 70vh;
 }
+
 
 .tab-content.active {
     display: block;

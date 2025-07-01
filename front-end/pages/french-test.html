@@ -39,6 +39,54 @@
     </script>
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/front-end/favicon500x500.jpeg" type="image/jpeg" class="js-path-fixer">
+    <style>
+        .tab-content {
+            flex: 0 0 100%;
+            height: 100%;
+            position: relative;
+        }
+        /* Swipeable container */
+        .swipe-container {
+            position: relative;
+            height: 400px; /* Adjust height as needed for your iframes */
+            overflow: hidden;
+            touch-action: pan-y; /* Allow vertical scrolling but handle horizontal ourselves */
+        }
+
+        .swipe-wrapper {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .swipe-wrapper.no-transition {
+            transition: none;
+        }
+        
+        /* Progress Indicator */
+        .progress-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: background 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -48,7 +96,7 @@
             </a>
         </div>
         <div class="header-title-container">
-            <h1 class="title">Search French words</h1>
+            <h1 class="title">Search French words 14:33</h1>
         </div>
         <div class="more-resources-button-container collapsible-menu-trigger">
             <a href="#" class="more-resources-link js-path-fixer">
@@ -224,5 +272,156 @@
     <script src="/Nistros/back-end/path-fixer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
     <script src="/back-end/iframes.js" class="js-path-fixer"></script>
+    <script>
+
+        class SwipeableTabs {
+            constructor(container) {
+                this.container = container;
+                this.swipeContainer = container.querySelector('.swipe-container');
+                this.swipeWrapper = container.querySelector('.swipe-wrapper');
+                this.tabButtons = container.querySelectorAll('.tab-button');
+                this.progressDots = container.querySelectorAll('.progress-dot');
+                
+                this.currentIndex = 0;
+                this.totalTabs = this.tabButtons.length;
+                this.isInteracting = false;
+                this.startX = 0;
+                this.currentX = 0;
+                this.startTransform = 0;
+                
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                this.updateActiveStates();
+            }
+            
+            bindEvents() {
+                // Mouse events
+                this.swipeContainer.addEventListener('mousedown', this.handleStart.bind(this));
+                document.addEventListener('mousemove', this.handleMove.bind(this));
+                document.addEventListener('mouseup', this.handleEnd.bind(this));
+                
+                // Touch events
+                this.swipeContainer.addEventListener('touchstart', this.handleStart.bind(this), { passive: false });
+                this.swipeContainer.addEventListener('touchmove', this.handleMove.bind(this), { passive: false });
+                this.swipeContainer.addEventListener('touchend', this.handleEnd.bind(this));
+                
+                // Tab button clicks
+                this.tabButtons.forEach((button, index) => {
+                    button.addEventListener('click', () => this.goToTab(index));
+                });
+                
+                // Prevent context menu on long press
+                this.swipeContainer.addEventListener('contextmenu', (e) => {
+                    if (this.isInteracting) e.preventDefault();
+                });
+            }
+            
+            handleStart(e) {
+                this.isInteracting = true;
+                this.swipeWrapper.classList.add('no-transition');
+                
+                const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+                this.startX = clientX;
+                this.currentX = clientX;
+                this.startTransform = this.currentIndex * -100;
+                
+                // Prevent default for touch to avoid scrolling
+                if (e.type === 'touchstart') {
+                    e.preventDefault();
+                }
+                
+                // Change cursor for mouse interactions
+                if (e.type === 'mousedown') {
+                    this.swipeContainer.style.cursor = 'grabbing';
+                }
+            }
+            
+            handleMove(e) {
+                if (!this.isInteracting) return;
+                
+                const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+                this.currentX = clientX;
+                
+                const deltaX = this.currentX - this.startX;
+                const containerWidth = this.swipeContainer.offsetWidth;
+                const percentage = (deltaX / containerWidth) * 100;
+                
+                // Calculate new transform with boundaries
+                let newTransform = this.startTransform + percentage;
+                
+                // Add resistance at boundaries
+                if (newTransform > 0) {
+                    newTransform = newTransform * 0.3; // Resistance when trying to go before first tab
+                } else if (newTransform < -(this.totalTabs - 1) * 100) {
+                    const excess = newTransform + (this.totalTabs - 1) * 100;
+                    newTransform = -(this.totalTabs - 1) * 100 + excess * 0.3; // Resistance when trying to go after last tab
+                }
+                
+                this.swipeWrapper.style.transform = `translateX(${newTransform}%)`;
+                
+                // Prevent default for touch to avoid scrolling
+                if (e.type === 'touchmove') {
+                    e.preventDefault();
+                }
+            }
+            
+            handleEnd(e) {
+                if (!this.isInteracting) return;
+                
+                this.isInteracting = false;
+                this.swipeWrapper.classList.remove('no-transition');
+                this.swipeContainer.style.cursor = '';
+                
+                const deltaX = this.currentX - this.startX;
+                const containerWidth = this.swipeContainer.offsetWidth;
+                const swipeThreshold = containerWidth * 0.2; // 20% of container width
+                
+                let newIndex = this.currentIndex;
+                
+                if (Math.abs(deltaX) > swipeThreshold) {
+                    if (deltaX < 0 && this.currentIndex < this.totalTabs - 1) {
+                        // Swiped left, go to next tab
+                        newIndex = this.currentIndex + 1;
+                    } else if (deltaX > 0 && this.currentIndex > 0) {
+                        // Swiped right, go to previous tab
+                        newIndex = this.currentIndex - 1;
+                    }
+                }
+                
+                this.goToTab(newIndex);
+            }
+            
+            goToTab(index) {
+                if (index < 0 || index >= this.totalTabs) return;
+                
+                this.currentIndex = index;
+                const transformValue = index * -100;
+                this.swipeWrapper.style.transform = `translateX(${transformValue}%)`;
+                
+                this.updateActiveStates();
+            }
+            
+            updateActiveStates() {
+                // Update tab buttons
+                this.tabButtons.forEach((button, index) => {
+                    button.classList.toggle('active', index === this.currentIndex);
+                });
+                
+                // Update progress dots
+                this.progressDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabContainer = document.querySelector('.tab-container');
+            new SwipeableTabs(tabContainer);
+        });
+    </script>
 </body>
 </html>
