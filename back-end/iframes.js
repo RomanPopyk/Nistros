@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     // Add swipe functionality for tab navigation
-    const tabContainer = document.querySelector('.tab-container');
+    const tabContainer = document.querySelector('.tab-content');
     let touchstartX = 0;
     let touchendX = 0;
     const swipeThreshold = 75; // Minimum pixels to consider a swipe
