@@ -124,15 +124,16 @@ link[rel="icon"] {
 }
 
 .more-resources-icon {
-    margin-bottom: 1px;
+    margin-bottom: 5px;
 }
 
 .settings-icon {
-    margin-top: 2px;
+    margin: 2px 0 4px 0;
 }
 
 .more-resources-button-container a {
     display: flex;
+    align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
     text-decoration: none;
@@ -145,6 +146,10 @@ link[rel="icon"] {
     align-items: center;
     text-decoration: none;
     color: #000000;
+}
+
+.more-resources-button-container span, .settings-button-container span {
+    padding: 0 8px;
 }
 
 .more-resources-button-container:hover, .settings-button-container:hover {
@@ -272,19 +277,22 @@ link[rel="icon"] {
 }
 
 /* Style for active (open) collapsible menu buttons */
-.more-resources-button-container.is-active,
-.settings-button-container.is-active {
-    background-color: #0cb1e8; /* A distinct background to indicate active state */
+.more-resources-button-container.is-active span,
+.settings-button-container.is-active span{
+    background-color: #0cb1e8;
     border-radius: 12px;
-    /* You can add more styles here, e.g., a subtle shadow, different text color */
     box-shadow: 0 0 10px rgba(4, 104, 236, 0.3); /* Example: a blue glow */
 }
 
-/* Optional: Ensure the hover effect still works nicely when active */
+/*  Ensure the hover effect still works nicely when active */
 .more-resources-button-container.is-active:hover,
 .settings-button-container.is-active:hover {
-    background-color: #0fabdf; /* Slightly lighter on hover when active */
     transform: translateY(-2px); /* Slightly more lift on hover */
+}
+
+.more-resources-button-container.is-active:hover span,
+.settings-button-container.is-active:hover span{
+    background-color: #0fabdf; /* Slightly darker on hover when active */
 }
 
 /* Class to instantly hide/show bars without transition */
@@ -294,7 +302,6 @@ link[rel="icon"] {
 }
 
 /* Style for the home page container */
-
 .language-selection-container {
     display: flex;
     justify-content: center;
@@ -615,6 +622,18 @@ link[rel="icon"] {
         height: 40px;
     }
 
+    .more-resources-button-container span, .settings-button-container span {
+        padding: 0 4px;
+    }
+
+    .more-resources-icon {
+        margin-bottom: 2px;
+    }
+
+    .settings-icon {
+        margin: 1px 0 2px 0;
+    }
+
     .collapsible-content {
         gap: 12px;
     }
@@ -665,7 +684,6 @@ link[rel="icon"] {
     /* Adjustments for the homepage title and buttons */
     .title {
         font-size: 24px; /* Smaller font size for title */
-        margin: 5px;
         cursor: default;
     }
 
@@ -684,7 +702,7 @@ link[rel="icon"] {
 @media (max-width: 480px) {
     .title {
         font-size: 20px; /* Even smaller font size for very small screens */
-        padding: 8px;
+        padding: 4px;
     }
 
     footer {
@@ -719,13 +737,6 @@ link[rel="icon"] {
         padding: 0 5px; /* Reduce padding for header */
         gap: 5px;
     }
-
-    /* Adjustments for the main header icon and title on very small screens */
-/*     header a {
-        position: static; 
-        display: block;
-        text-align: center;
-    } */
 
     .home-icon, .settings-icon, .more-resources-icon {
         align-self: center;
