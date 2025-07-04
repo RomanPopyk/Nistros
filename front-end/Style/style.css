@@ -113,6 +113,9 @@ link[rel="icon"] {
     justify-content: center;
     align-items: center;
 }
+.home-link {
+    font-size: 0;
+}
 
 .home-icon-container:hover {
     transform: scale(1.03);
@@ -808,9 +811,8 @@ link[rel="icon"] {
     color: #666;
     font-style: italic;
 }
-
 @media (min-width: 379px) and (max-width: 480px) {
     header {
-        padding: 10px 7px;
+        padding: 6px 7px;
     }
 }
