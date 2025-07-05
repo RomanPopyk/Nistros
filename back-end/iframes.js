@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://sk.wikipedia.org/wiki/${encodedSearchTerm}`;
             case 'glosbe-fr-ua':
                 return `https://glosbe.com/fr/uk/${encodedSearchTerm}`;
+            case 'glosbe-sk-ua':
+                return `https://glosbe.com/sk/uk/${encodedSearchTerm}`;
             case 'conjugation-fr':
                 return `https://conjugation-fr.com/conjugate.php?verb=${encodedSearchTerm}`;
             case 'google-images-fr':
@@ -56,6 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://forvo.com/search/${encodedSearchTerm}`;
             case 'cnrtl-etymology':
                 return `https://www.cnrtl.fr/etymologie/${encodedSearchTerm}`;
+            case 'lingea-sk-ua':
+                return `https://slovniky.lingea.sk/ukrajinsko-slovensky/${encodedSearchTerm}`;
+            case 'narecie-sk':
+                return `https://narecie.sk/${encodedSearchTerm}`;
+            case 'juls':
+                return `https://slovnik.juls.savba.sk/?w=${encodedSearchTerm}&s=exact`;
             default:
                 // Log a warning for unhandled sites to make debugging easier.
                 console.warn(`Unknown target site: ${siteName}. Cannot generate URL.`);
@@ -343,3 +351,20 @@ clearBtn.addEventListener('click', () => {
 });
 // Initial check on page load
 updateClearButton();
+
+// Update html
+const titleElement = document.getElementById('french-title');
+
+function updateTitleText() {
+    if (window.innerWidth <= 380) {
+        titleElement.textContent = 'French';
+    } else {
+        titleElement.textContent = 'Search French words';
+    }
+}
+
+// Call the function initially to set the correct text on page load
+updateTitleText();
+
+// Add an event listener to call the function whenever the window is resized
+window.addEventListener('resize', updateTitleText);
