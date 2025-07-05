@@ -15,6 +15,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-tap-highlight-color: transparent !important;
 }
 /* Style for the main container */
 main {
@@ -45,10 +46,15 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    user-select: none;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+button, a, input, select {
+    -webkit-tap-highlight-color: transparent;
 }
 
 header {
@@ -58,6 +64,7 @@ header {
     background-color: #03ecf8;
     padding: 15px 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    user-select: none;
 }
 
 .header-title-container {
@@ -78,13 +85,23 @@ header {
     background: radial-gradient(circle, #007BFF 10%, #03ecf8 100%);
 }
 
+.title:hover {
+    background: radial-gradient(circle, #007BFF 10%, #03ecf8 98%);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: default;
+}
+
 footer {
     text-align: center;
     padding: 20px;
     background-color: #bab4b4;
     color: #fff;
     width: 100%;
+    margin-top: 5px;
+    cursor: default;
+    user-select: none;
 }
+
 /* Style for favicon */
 link[rel="icon"] {
     width: 1px;
@@ -96,6 +113,13 @@ link[rel="icon"] {
     justify-content: center;
     align-items: center;
 }
+.home-link {
+    font-size: 0;
+}
+
+.home-icon-container:hover {
+    transform: scale(1.03);
+}
 .home-icon, .settings-icon, .more-resources-icon {
     width: 43px;
     height: 43px;
@@ -103,15 +127,16 @@ link[rel="icon"] {
 }
 
 .more-resources-icon {
-    margin-bottom: 1px;
+    margin-bottom: 5px;
 }
 
 .settings-icon {
-    margin-top: 2px;
+    margin: 2px 0 4px 0;
 }
 
 .more-resources-button-container a {
     display: flex;
+    align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
     text-decoration: none;
@@ -125,6 +150,11 @@ link[rel="icon"] {
     text-decoration: none;
     color: #000000;
 }
+
+.more-resources-button-container span, .settings-button-container span {
+    padding: 0 8px;
+}
+
 .more-resources-button-container:hover, .settings-button-container:hover {
     background-color: #0cdde8;
     border-radius: 12px;
@@ -134,12 +164,13 @@ link[rel="icon"] {
 .collapsible-more-bar {
     max-height: 0;          /* Initially hidden */
     overflow: hidden;       /* Hide overflow content */
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    transition: max-height 0.4s ease-out, padding 0.3s ease-out;
     background-color: #e5e7eb;
     border-bottom: 1px solid #d1d5db; 
     box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
     padding: 0 10px; 
     box-sizing: border-box; 
+    user-select: none;
 }
 
 .collapsible-more-bar.show {
@@ -147,6 +178,24 @@ link[rel="icon"] {
     padding: 8px 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+.collapsible-settings-bar {
+    max-height: 0;          /* Initially hidden */
+    overflow: hidden;       /* Hide overflow content */
+    transition: max-height 0.4s ease-out, padding 0.3s ease-out;
+    background-color: #e5e7eb;
+    border-bottom: 1px solid #d1d5db; 
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); 
+    padding: 0 10px; 
+    box-sizing: border-box; 
+}
+
+.collapsible-settings-bar.show {
+    max-height: 200px; 
+    padding: 8px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 
 .collapsible-content {
     display: flex;
@@ -226,10 +275,36 @@ link[rel="icon"] {
     color: #667eea;
 }
 
-.collapsible-more-bar.show .collapsible-icon-link {
+.collapsible-more-bar.show .collapsible-settings-bar.show .collapsible-icon-link {
     animation: slideDown 0.4s ease forwards;
 }
 
+/* Style for active (open) collapsible menu buttons */
+.more-resources-button-container.is-active span,
+.settings-button-container.is-active span{
+    background-color: #0cb1e8;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(4, 104, 236, 0.3); /* Example: a blue glow */
+}
+
+/*  Ensure the hover effect still works nicely when active */
+.more-resources-button-container.is-active:hover,
+.settings-button-container.is-active:hover {
+    transform: translateY(-2px); /* Slightly more lift on hover */
+}
+
+.more-resources-button-container.is-active:hover span,
+.settings-button-container.is-active:hover span{
+    background-color: #0fabdf; /* Slightly darker on hover when active */
+}
+
+/* Class to instantly hide/show bars without transition */
+.collapsible-more-bar.no-transition,
+.collapsible-settings-bar.no-transition {
+    transition: none !important; /* Overrides existing transitions when applied */
+}
+
+/* Style for the home page container */
 .language-selection-container {
     display: flex;
     justify-content: center;
@@ -435,7 +510,7 @@ link[rel="icon"] {
 .tab-container {
     margin: 0 20px;
     background: white;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     overflow: hidden;
 }
@@ -475,6 +550,7 @@ link[rel="icon"] {
     display: none;
     height: 70vh;
 }
+
 
 .tab-content.active {
     display: block;
@@ -525,6 +601,13 @@ link[rel="icon"] {
     height: 100%;
     border: none;
 }
+
+#copyright-container {
+    position: absolute;
+    left: 50%; /* Move its left edge to the horizontal center of the parent */
+    transform: translateX(-50%); /* Shift it back by half its own width to truly center it */
+    white-space: nowrap;
+}
 /* Responsive Design */
 @media (min-width:769px){
     /* Removes top borders for the second grid card when the view is in column */
@@ -540,6 +623,18 @@ link[rel="icon"] {
     header img {
         width: 40px; /* Slightly smaller icon */
         height: 40px;
+    }
+
+    .more-resources-button-container span, .settings-button-container span {
+        padding: 0 4px;
+    }
+
+    .more-resources-icon {
+        margin-bottom: 2px;
+    }
+
+    .settings-icon {
+        margin: 1px 0 2px 0;
     }
 
     .collapsible-content {
@@ -592,7 +687,7 @@ link[rel="icon"] {
     /* Adjustments for the homepage title and buttons */
     .title {
         font-size: 24px; /* Smaller font size for title */
-        margin: 5px;
+        cursor: default;
     }
 
     .language-selection-container {
@@ -610,7 +705,19 @@ link[rel="icon"] {
 @media (max-width: 480px) {
     .title {
         font-size: 20px; /* Even smaller font size for very small screens */
-        padding: 8px;
+        padding: 4px;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column; /* Stack footer elements vertically */
+        padding: 10px;
+    }
+
+    #copyright-container {
+        position: static;
+        transform: none;
+        left: auto;
     }
 
     #description-homepage {
@@ -633,13 +740,6 @@ link[rel="icon"] {
         padding: 0 5px; /* Reduce padding for header */
         gap: 5px;
     }
-
-    /* Adjustments for the main header icon and title on very small screens */
-/*     header a {
-        position: static; 
-        display: block;
-        text-align: center;
-    } */
 
     .home-icon, .settings-icon, .more-resources-icon {
         align-self: center;
@@ -696,7 +796,8 @@ link[rel="icon"] {
     }
     
     .tab-button {
-        padding: 10px 15px;
+        margin: 0 2px;
+        padding: 12px 14px;
         font-size: 14px;
     }
 }
@@ -710,9 +811,8 @@ link[rel="icon"] {
     color: #666;
     font-style: italic;
 }
-
 @media (min-width: 379px) and (max-width: 480px) {
     header {
-        padding: 10px 7px;
+        padding: 6px 7px;
     }
 }

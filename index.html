@@ -6,6 +6,38 @@
     <title>Home Page | Nistros</title>
     <link rel="stylesheet" href="front-end/Style/style.css">
     <link rel="icon" href="front-end/favicon500x500.jpeg" type="image/jpeg">
+    <style >
+        header {
+            padding: 18px 25px;
+        }
+        #home-page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #bab4b4;
+            color: #fff;
+            width: 100%;
+            margin-top: 5px;
+            cursor: default;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 13px 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                padding: 0 5px; 
+                gap: 5px;
+            }
+        }
+        @media (min-width: 379px) and (max-width: 480px) {
+            header {
+                padding: 15px 7px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,9 +57,12 @@
             <button class="language-button" onclick="location.href='front-end/pages/french.html'">🇫🇷 Français</button>
             <button class="language-button" onclick="location.href='front-end/pages/slovak.html'">🇸🇰 Slovenský</button>
             <button class="language-button" onclick="location.href='front-end/pages/german.html'">🇩🇪 Deutsch</button>
+            <button class="language-button" onclick="location.href='front-end/pages/french-test.html'">Test swipe function</button>
+            <button class="language-button" onclick="location.href='front-end/pages/french-swipe-works.html'">Swipe works, but iframes are offset</button>
     </main>
-    <footer>
-        <p>&copy; 2025 Nistros Free Access</p>
+    <footer id="home-page-footer">
+        <p><a href="mailto:romanrpopyk@ukr.net">Contact me </a></p>
+        <p id="copyright-container">&copy; 2025 Nistros Free Access</p>
     </footer>
 </body>
 </html>
