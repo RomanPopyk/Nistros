@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `https://forvo.com/search/${encodedSearchTerm}`;
             case 'cnrtl-etymology':
                 return `https://www.cnrtl.fr/etymologie/${encodedSearchTerm}`;
+            case 'littre':
+                return `https://www.littre.org/definition/${encodedSearchTerm}`;
             case 'lingea-sk-ua':
                 return `https://slovniky.lingea.sk/ukrajinsko-slovensky/${encodedSearchTerm}`;
             case 'narecie-sk':

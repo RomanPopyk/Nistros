@@ -395,26 +395,6 @@ link[rel="icon"] {
 #clear-button:hover {
     color: #918c8c;
 }
-
-#results-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-#results-list {
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-}
-#wiktionary-definitions {
-    display: none;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 /* Style for the tooltips */
 .fancy-tooltip {
     position: relative;
