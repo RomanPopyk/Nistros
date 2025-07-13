@@ -330,6 +330,13 @@
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             new SwipeableTabs();
+           
+        });
+        window.addEventListener('load', function() {
+            // Show all tab content elements
+            document.querySelectorAll('.tab-content').forEach(function(element) {
+                element.style.display = 'block';
+            });
         });
     </script>
 </body>

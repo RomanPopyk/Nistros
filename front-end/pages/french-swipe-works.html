@@ -54,9 +54,7 @@
             position: relative;
         }
 
-        .tab-content.active {
-            display: block; /* Show active tab */
-        }
+        
 
         /* Swipeable container */
         .swipe-container {
@@ -80,10 +78,9 @@
             transition: none;
         }
 
-        .swipe-wrapper .tab-content {
-            flex: 0 0 10%;
+        .tab-content {
+            flex: 0 0 calc(100% / 6);
             width: calc(100% / 6);
-            display: block !important; /* Override the display: none for swipe mode */
             height: 100%;
             min-width: 0;
             flex-shrink: 0;
@@ -524,6 +521,7 @@
             if (tabContainer) {
                 new SwipeableTabs(tabContainer);
             }
+            
         });
 
 
@@ -558,6 +556,12 @@ function switchTab(tabClass, clickedButton) {
         clickedButton.classList.add('active');
     }
 }
+window.addEventListener('load', function() {
+            // Show all tab content elements
+            document.querySelectorAll('.tab-content').forEach(function(element) {
+                element.style.display = 'block';
+            });
+        });
     </script>
 </body>
 </html>
