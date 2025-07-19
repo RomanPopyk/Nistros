@@ -721,7 +721,19 @@ link[rel="icon"] {
         gap: 5px;
     }
 
-    .home-icon, .settings-icon, .more-resources-icon {
+    .home-icon-container {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    .home-icon {
+        align-self: center;
+        width: 36px;
+        height: 36px;
+        transition: transform 0.3s ease;
+    }
+
+    .settings-icon, .more-resources-icon {
         align-self: center;
         width: 30px;
         height: 30px;
