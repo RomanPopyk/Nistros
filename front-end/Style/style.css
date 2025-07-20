@@ -622,7 +622,7 @@ link[rel="icon"] {
     bottom: 0px; /* Just above progress dots */
     left: 0;
     right: 0;
-    height: 12lvh;
+    height: 12dvh;
     background: transparent;
     z-index: 20;
     cursor: grab;
@@ -867,6 +867,9 @@ link[rel="icon"] {
         margin: 0 2px;
         padding: 12px 14px;
         font-size: 14px;
+    }
+    .swipe-overlay {
+        height: 18dvh;
     }
 }
 
