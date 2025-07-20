@@ -561,7 +561,7 @@ link[rel="icon"] {
             width: 100%;
             height: 100%;
             background: rgba(255, 255, 255, 0.8); /* Semi-transparent overlay */
-            z-index: -10; /* Ensure it sits above the iframe but below the swipe overlay */
+            z-index: -15; /* Ensure it sits above the iframe but below the swipe overlay */
 }
 
 .tab-content.active {
@@ -622,7 +622,7 @@ link[rel="icon"] {
     bottom: 0px; /* Just above progress dots */
     left: 0;
     right: 0;
-    height: 70px;
+    height: 12dvh;
     background: transparent;
     z-index: 20;
     cursor: grab;
@@ -633,7 +633,7 @@ link[rel="icon"] {
 
 .swipe-overlay:active {
     cursor: grabbing;
-    background: grey;
+    background: blue;
     opacity: 0.1;
 }
 

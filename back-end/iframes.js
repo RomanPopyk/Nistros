@@ -455,6 +455,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     new SwipeableTabs();
+
+    // Make sure the mobile tap is considered as active
+    document.body.addEventListener('touchstart', function() {}, false);
 });
 
 
