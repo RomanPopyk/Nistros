@@ -54,10 +54,6 @@
             position: relative;
         }
 
-        .tab-content.active {
-            display: block; /* Show active tab */
-        }
-
         /* Swipeable container */
         .swipe-container {
             position: relative;
@@ -80,10 +76,9 @@
             transition: none;
         }
 
-        .swipe-wrapper .tab-content {
-            flex: none;
+        .tab-content {
+            flex: 0 0 calc(100% / 6);
             width: calc(100% / 6);
-            display: block !important; /* Override the display: none for swipe mode */
             height: 100%;
             min-width: 0;
             flex-shrink: 0;
@@ -157,7 +152,7 @@
             </a>
         </div>
         <div class="header-title-container">
-            <h1 class="title">Search French words</h1>
+            <h1 class="title">Don't edit this page</h1>
         </div>
         <div class="more-resources-button-container collapsible-menu-trigger">
             <a href="#" class="more-resources-link js-path-fixer">
@@ -524,6 +519,7 @@
             if (tabContainer) {
                 new SwipeableTabs(tabContainer);
             }
+            
         });
 
 
@@ -558,6 +554,12 @@ function switchTab(tabClass, clickedButton) {
         clickedButton.classList.add('active');
     }
 }
+window.addEventListener('load', function() {
+            // Show all tab content elements
+            document.querySelectorAll('.tab-content').forEach(function(element) {
+                element.style.display = 'block';
+            });
+        });
     </script>
 </body>
 </html>

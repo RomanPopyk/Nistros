@@ -59,7 +59,7 @@
         <div class="settings-button-container collapsible-menu-trigger">
             <a href="#" class="settings-link js-path-fixer">
                 <img src="/images/webp/settings-icon-98x100.webp" alt="Settings button" class="settings-icon js-path-fixer">
-                <span>Settings</span>
+                <span>Settings32</span>
             </a>
         </div>
     </header>
@@ -90,6 +90,10 @@
                     <img src="/images/webp/cnrtl-logo-128x128.webp" alt="cnrtl icon" class="collapsible-icon js-path-fixer">
                     <span>CNRTL</span>
                 </a>
+                <a href="https://www.littre.org/" target="_blank" class="collapsible-icon-link" data-target-site="littre">
+                    <img src="/images/littre-icon-468x584.png" alt="littre icon" class="collapsible-icon js-path-fixer">
+                    <span>Littré</span>
+                </a>
             </div>
         </div>
         <div class="collapsible-settings-bar">
@@ -117,6 +121,10 @@
                 <button class="collapsible-icon-link" onclick="">
                     <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
                     <span>Scrollbar toggle</span>
+                </button>
+                 <button class="collapsible-icon-link" onclick="">
+                    <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
+                    <span>Swipe overlay toggle</span>
                 </button>
                 <button class="collapsible-icon-link" onclick="">
                     <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
@@ -148,35 +156,37 @@
         <!-- Tab Layout -->
         <section class="tab-container" id="tab-layout">
             <div class="tab-header">
-                <button class="tab-button active" onclick="switchTab('en-wiktionary-tab', this)">📚 EN Wiktionary</button>
-                <button class="tab-button" onclick="switchTab('fr-wiktionary-tab', this)">FR Wiktionary</button>
-                <button class="tab-button" onclick="switchTab('dict-fr-ua-tab', this)">🔤 Dict.com</button>
-                <button class="tab-button" onclick="switchTab('etymonline-tab', this)">🌱 Etymonline</button>
-                <button class="tab-button" onclick="switchTab('fr-wikipedia-tab', this)">🌐 FR Wikipedia</button>
-                <button class="tab-button" onclick="switchTab('conjugation-fr-tab', this)">Conjugation</button>
+                <button class="tab-button active" data-tab="0">📚 EN Wiktionary</button>
+                <button class="tab-button" data-tab="1">📖 FR Wiktionary</button>
+                <button class="tab-button" data-tab="2">🔤 Dict.com</button>
+                <button class="tab-button" data-tab="3">🌱 Etymonline</button>
+                <button class="tab-button" data-tab="4">🌐 FR Wikipedia</button>
+                <button class="tab-button" data-tab="5">Conjugation</button>
             </div>
 
             <div class="swipe-container">
-                <div class="swipe-wrapper">
-                    <div class="en-wiktionary-tab tab-content active">
+                <div class="swipe-wrapper" id="tab-wrapper">
+                    <div class="tab-content" data-tab="0">
                         <iframe class="dynamic-iframe" data-target-site="en-wiktionary" src="https://en.wiktionary.org/wiki" title="English Wiktionary"></iframe>
                     </div>
-                    <div class="fr-wiktionary-tab tab-content">
+                    <div class="tab-content" data-tab="1">
                         <iframe class="dynamic-iframe" data-target-site="fr-wiktionary" src="https://fr.wiktionary.org/wiki" title="French Wiktionary"></iframe>
                     </div>
-                    <div class="dict-fr-ua-tab tab-content">
+                    <div class="tab-content" data-tab="2">                     
                         <iframe class="dynamic-iframe" data-target-site="dict-fr-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
                     </div>
-                    <div class="etymonline-tab tab-content">
+                    <div class="tab-content" data-tab="3">                      
                         <iframe class="dynamic-iframe" data-target-site="etymonline" src="https://www.etymonline.com" title="Etymology Online"></iframe>
                     </div>
-                    <div class="fr-wikipedia-tab tab-content">
+                    <div class="tab-content" data-tab="4">
                         <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
                     </div>
-                    <div class="conjugation-fr-tab tab-content">
+                    <div class="tab-content" data-tab="5">
                         <iframe class="dynamic-iframe" data-target-site="conjugation-fr" src="https://www.conjugation-fr.com/index.html" title="Conjugation"></iframe>
                     </div>
                 </div>
+
+                <div class="swipe-overlay" id="swipe-overlay"></div>
                 <!-- Progress Indicator -->
                 <div class="progress-indicator">
                     <div class="progress-dot active"></div>
@@ -223,6 +233,6 @@
     </footer>
     <script src="/Nistros/back-end/path-fixer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-    <script src="/back-end/iframes.js" class="js-path-fixer"></script>
+    <script src="/back-end/iframes-new.js" class="js-path-fixer"></script>
 </body>
 </html>
