@@ -622,7 +622,7 @@ link[rel="icon"] {
     bottom: 0px; /* Just above progress dots */
     left: 0;
     right: 0;
-    height: 12svh;
+    height: 12lvh;
     background: transparent;
     z-index: 20;
     cursor: grab;
