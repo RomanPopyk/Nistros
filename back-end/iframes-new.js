@@ -134,7 +134,6 @@ function switchTab(tabClass, clickedButton) {
         console.warn(`Tab content with class '${tabClass}' not found.`);
     }
 }
-
 // Swipe feature
 class SwipeableTabs {
     constructor() {
@@ -243,6 +242,7 @@ class SwipeableTabs {
     }
 }
 
+
 // Collapsible functionality class
 class CollapsibleManager {
     constructor() {
@@ -320,6 +320,7 @@ class CollapsibleManager {
         });
     }
 }
+
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

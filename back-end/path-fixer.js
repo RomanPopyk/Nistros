@@ -56,6 +56,6 @@ window.addEventListener('load', function() {
         
         setTimeout(function() {
             location.reload();
-        }, 2000);
+        }, 2500);
     }
 });
