@@ -4,7 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>French | Nistros</title>
-    
+    <script>
+        (function() {
+            const githubBasePath = '/Nistros/';
+            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
+                                window.location.hostname.includes('github.io');
+
+            let scriptPath = '/main.js';
+
+            if (isGitHubPages) {
+                scriptPath = githubBasePath + scriptPath.substring(1); 
+                console.log(`Loading main.js from GitHub Pages path: ${scriptPath}`);
+            } else {
+                console.log(`Loading main.js from local path: ${scriptPath}`);
+            }
+
+            const script = document.createElement('script');
+            script.type = 'module'; // specify module type
+            script.src = scriptPath;
+            script.onload = () => {
+                console.log('main.js loaded successfully.');
+            };
+            script.onerror = () => {
+                console.error(`Failed to load main.js from: ${scriptPath}`);
+            };
+            document.head.appendChild(script);
+        })();
+</script>
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/images/webp/favicon100x100.webp" type="image/webp" class="js-path-fixer">
 </head>
@@ -27,7 +53,7 @@
         <div class="settings-button-container collapsible-menu-trigger">
             <a href="#" class="settings-link js-path-fixer">
                 <img src="/images/webp/settings-icon-98x100.webp" alt="Settings button" class="settings-icon js-path-fixer">
-                <span>Settings43</span>
+                <span>Settings46</span>
             </a>
         </div>
     </header>
@@ -198,7 +224,7 @@
     <footer>
         <p>&copy; 2025 Nistros Free Access</p>
     </footer>
+    <script src="/Nistros/back-end/path-fixer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-    <script type="module" src="/main.js"></script>
 </body>
 </html>
