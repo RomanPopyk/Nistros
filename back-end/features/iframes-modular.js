@@ -152,7 +152,8 @@ class LayoutManager {
             document.querySelector('.iframe-layout-option:nth-child(2)')?.classList.add('active');
         }
         
-        document.getElementById(layoutType)?.checked = true;
+        // Set the radio button state
+        document.getElementById(layoutType).checked = true;
     }
 }
 
