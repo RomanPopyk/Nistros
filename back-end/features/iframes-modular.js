@@ -95,6 +95,7 @@ class SearchManager {
             
             if (newUrl) {
                 if (element.tagName === 'IFRAME') {
+                    element.src = 'about:blank';
                     element.src = newUrl;
                 } else {
                     element.href = newUrl;
