@@ -87,6 +87,9 @@ class SearchManager {
             alert("Please enter a search term.");
             return; 
         }
+        // Store current active tab before updating
+        const activeTab = document.querySelector('.tab-content.active') || document.querySelector('.tab-content[data-tab="0"]');
+        const activeTabIndex = activeTab ? activeTab.dataset.tab : '0';
 
         // Update all dynamic elements
         [...this.dynamicIframes, ...this.collapsibleLinks].forEach(element => {
@@ -95,13 +98,29 @@ class SearchManager {
             
             if (newUrl) {
                 if (element.tagName === 'IFRAME') {
-                    element.src = 'about:blank';
                     element.src = newUrl;
                 } else {
                     element.href = newUrl;
                 }
             }
         });
+
+        // Restore active tab state after iframe updates
+        setTimeout(() => {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-content, .tab-button').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Reactivate the previously active tab
+            const tabToActivate = document.querySelector(`.tab-content[data-tab="${activeTabIndex}"]`);
+            const buttonToActivate = document.querySelector(`.tab-button[data-tab="${activeTabIndex}"]`);
+            
+            if (tabToActivate && buttonToActivate) {
+                tabToActivate.classList.add('active');
+                buttonToActivate.classList.add('active');
+            }
+        }, 50);
 
         // Update page title with the search term
         document.title = `${searchTerm} - ${this.originalTitle}`;
