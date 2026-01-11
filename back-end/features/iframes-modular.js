@@ -90,6 +90,8 @@ class SearchManager {
         // Store current active tab before updating
         const activeTab = document.querySelector('.tab-content.active') || document.querySelector('.tab-content[data-tab="0"]');
         const activeTabIndex = activeTab ? activeTab.dataset.tab : '0';
+        const swipeWrapper = document.getElementById('tab-wrapper');
+        const currentTransform = swipeWrapper ? getComputedStyle(swipeWrapper).transform : 'none';
 
         // Update all dynamic elements
         [...this.dynamicIframes, ...this.collapsibleLinks].forEach(element => {
@@ -120,6 +122,17 @@ class SearchManager {
                 tabToActivate.classList.add('active');
                 buttonToActivate.classList.add('active');
             }
+            // Restore swipe wrapper position
+            if (swipeWrapper && currentTransform !== 'none') {
+                swipeWrapper.style.transform = currentTransform;
+            } else if (swipeWrapper && activeTabIndex !== '0') {
+                // Calculate the correct transform based on tab index
+                const tabWidth = 100; // Assuming each tab is 100% width
+                const translateX = -activeTabIndex * tabWidth;
+                swipeWrapper.style.transform = `translateX(${translateX}%)`;
+            }
+
+            
         }, 50);
 
         // Update page title with the search term
@@ -180,18 +193,29 @@ class LayoutManager {
 // Tab Manager Class
 class TabManager {
     switchTab(tabClass, clickedButton) {
+        const tabIndex = clickedButton?.dataset.tab;
+
         // Remove active class from all tabs and buttons
         document.querySelectorAll('.tab-content, .tab-button').forEach(el => {
             el.classList.remove('active');
         });
         
         // Activate selected tab
-        const selectedTab = document.querySelector(`.${tabClass}.tab-content`);
+        /* const selectedTab = document.querySelector(`.${tabClass}.tab-content`);
         if (selectedTab) {
             selectedTab.classList.add('active');
             clickedButton?.classList.add('active');
         } else {
             console.warn(`Tab content with class '${tabClass}' not found.`);
+        } */
+
+        // Activate selected tab by data-tab attribute
+        if (tabIndex !== undefined) {
+            const selectedTab = document.querySelector(`.tab-content[data-tab="${tabIndex}"]`);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+                clickedButton.classList.add('active');
+            }
         }
     }
 }

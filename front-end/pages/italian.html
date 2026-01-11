@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>French | Nistros</title>
+    <title>Italian | Nistros</title>
     <script>
+        // This script block handles the conditional loading of the main application script (iframes.js).
+        // It must run before the DOMContentLoaded event if iframes.js contains logic that depends on elements being present at that point.
         (function() {
             const githubBasePath = '/Nistros/';
-            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
-                                window.location.hostname.includes('github.io');
+            const localBasePath = '/'; // For local development, root-relative paths work as is
 
-            let scriptPath = '/main.js';
+            const isGitHubPages = window.location.hostname.endsWith('.github.io') || 
+                                  window.location.hostname.includes('github.io');
+
+            let scriptPath = '/back-end/iframes.js'; // Default path for local environment
 
             if (isGitHubPages) {
+                // Adjust path for GitHub Pages. Remove leading '/' to avoid '//'
                 scriptPath = githubBasePath + scriptPath.substring(1); 
-                console.log(`Loading main.js from GitHub Pages path: ${scriptPath}`);
+                console.log(`Loading iframes.js from GitHub Pages path: ${scriptPath}`);
             } else {
-                console.log(`Loading main.js from local path: ${scriptPath}`);
+                console.log(`Loading iframes.js from local path: ${scriptPath}`);
             }
 
             const script = document.createElement('script');
-            script.type = 'module'; // specify module type
             script.src = scriptPath;
             script.onload = () => {
-                console.log('main.js loaded successfully.');
+                console.log('iframes.js loaded successfully.');
+                // If iframes.js has an initialization function, you could call it here.
+                // For this example, assuming its content runs on DOMContentLoaded.
             };
             script.onerror = () => {
-                console.error(`Failed to load main.js from: ${scriptPath}`);
+                console.error(`Failed to load iframes.js from: ${scriptPath}`);
             };
-            document.head.appendChild(script);
-        })();
-</script>
+            document.head.appendChild(script); // Append to head or body
+        })(); // Self-executing function to keep scope clean
+    </script>
     <link rel="stylesheet" href="/front-end/Style/style.css" class="js-path-fixer">
     <link rel="icon" href="/images/webp/favicon100x100.webp" type="image/webp" class="js-path-fixer">
 </head>
@@ -42,7 +48,7 @@
             </a>
         </div>
         <div class="header-title-container">
-            <h1 class="title" id="french-title">Search French words</h1>
+            <h1 class="title" id="italian-title">Search Italian words</h1>
         </div>
         <div class="more-resources-button-container collapsible-menu-trigger">
             <a href="#" class="more-resources-link js-path-fixer">
@@ -53,40 +59,24 @@
         <div class="settings-button-container collapsible-menu-trigger">
             <a href="#" class="settings-link js-path-fixer">
                 <img src="/images/webp/settings-icon-98x100.webp" alt="Settings button" class="settings-icon js-path-fixer">
-                <span>Settings50</span>
+                <span>Settings</span>
             </a>
         </div>
     </header>
     <nav>
         <div class="collapsible-more-bar">
             <div class="collapsible-content">
-                <a href="https://glosbe.com/fr/uk/" target="_blank" class="collapsible-icon-link" data-target-site="glosbe-fr-ua">
+                <a href="https://glosbe.com/it/uk/" target="_blank" class="collapsible-icon-link" data-target-site="glosbe-it-ua">
                     <img src="/images/webp/glosbe-logo-100x100.webp" alt="Glosbe icon" class="collapsible-icon js-path-fixer">
                     <span class="">Glosbe</span>
-                </a>
-                <a href="https://context.reverso.net/translation/french-ukrainian" target="_blank" class="collapsible-icon-link" data-target-site="reverso-fr-ua">
-                    <img src="/images/webp/reverso-icon-128x128.webp" alt="Reverso icon" class="collapsible-icon js-path-fixer">
-                    <span>Reverso</span>
-                </a>
-                <a href="https://e2u.org.ua/" target="_blank" class="collapsible-icon-link" data-target-site="e2u">
-                    <img src="/images/webp/e2u-logo-75x75.webp" alt="E2U icon" class="collapsible-icon js-path-fixer">
-                    <span>E2U</span>
                 </a>
                  <a href="https://forvo.com/" target="_blank" class="collapsible-icon-link" data-target-site="forvo">
                     <img src="/images/webp/forvo-icon-375x375.webp" alt="Forvo icon" class="collapsible-icon js-path-fixer">
                     <span>Forvo</span>
                 </a>
-                <a href="https://www.google.com/search?udm=2&q=apple site:.fr" target="_blank" class="collapsible-icon-link" data-target-site="google-images-fr">
+                <a href="https://www.google.com/search?udm=2&q=apple site:.it" target="_blank" class="collapsible-icon-link" data-target-site="google-images-it">
                     <img src="/images/google-images-icon-256x256.png" alt="Google Images icon" class="collapsible-icon js-path-fixer">
                     <span>Google Images</span>
-                </a>
-                <a href="https://www.cnrtl.fr/etymologie/" target="_blank" class="collapsible-icon-link" data-target-site="cnrtl-etymology">
-                    <img src="/images/webp/cnrtl-logo-128x128.webp" alt="cnrtl icon" class="collapsible-icon js-path-fixer">
-                    <span>CNRTL</span>
-                </a>
-                <a href="https://www.littre.org/" target="_blank" class="collapsible-icon-link" data-target-site="littre">
-                    <img src="/images/littre-icon-468x584.png" alt="littre icon" class="collapsible-icon js-path-fixer">
-                    <span>Littré</span>
                 </a>
             </div>
         </div>
@@ -115,10 +105,6 @@
                 <button class="collapsible-icon-link" onclick="">
                     <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
                     <span>Scrollbar toggle</span>
-                </button>
-                 <button class="collapsible-icon-link" onclick="">
-                    <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
-                    <span>Swipe overlay toggle</span>
                 </button>
                 <button class="collapsible-icon-link" onclick="">
                     <img src="" alt=" icon" class="collapsible-icon js-path-fixer">
@@ -150,36 +136,35 @@
         <!-- Tab Layout -->
         <section class="tab-container" id="tab-layout">
             <div class="tab-header">
-                <button class="tab-button active" data-tab="0" onclick="switchTab('tab-content', this)">📚 EN Wiktionary</button>
-                <button class="tab-button" data-tab="1" onclick="switchTab('tab-content', this)">📖 FR Wiktionary</button>
-                <button class="tab-button" data-tab="2" onclick="switchTab('tab-content', this)">🔤 Dict.com</button>
-                <button class="tab-button" data-tab="3" onclick="switchTab('tab-content', this)">🌱 Etymonline</button>
-                <button class="tab-button" data-tab="4" onclick="switchTab('tab-content', this)">🌐 FR Wikipedia</button>
-                <button class="tab-button" data-tab="5" onclick="switchTab('tab-content', this)">Conjugation</button>
+                <button class="tab-button active" onclick="switchTab('en-wiktionary-tab', this)">📚 EN Wiktionary</button>
+                <button class="tab-button" onclick="switchTab('sk-wiktionary-tab', this)">SK Wiktionary</button>
+                <button class="tab-button" onclick="switchTab('lingea-sk-ua-tab', this)">Lingea</button>
+                <button class="tab-button" onclick="switchTab('dict-sk-ua-tab', this)">🔤 Dict.com</button>
+                <button class="tab-button" onclick="switchTab('sk-wikipedia-tab', this)">🌐 SK Wikipedia</button>
+                <button class="tab-button" onclick="switchTab('narecie-tab', this)">Nárečie</button>
             </div>
 
             <div class="swipe-container">
-                <div class="swipe-wrapper" id="tab-wrapper">
-                    <div class="tab-content" data-tab="0">
+                <div class="swipe-wrapper">
+                    <div class="en-wiktionary-tab tab-content active">
                         <iframe class="dynamic-iframe" data-target-site="en-wiktionary" src="https://en.wiktionary.org/wiki" title="English Wiktionary"></iframe>
                     </div>
-                    <div class="tab-content" data-tab="1">
-                        <iframe class="dynamic-iframe" data-target-site="fr-wiktionary" src="https://fr.wiktionary.org/wiki" title="French Wiktionary"></iframe>
+                    <div class="sk-wiktionary-tab tab-content">
+                        <iframe class="dynamic-iframe" data-target-site="sk-wiktionary" src="https://sk.wiktionary.org/wiki" title="Slovak Wiktionary"></iframe>
                     </div>
-                    <div class="tab-content" data-tab="2">                     
-                        <iframe class="dynamic-iframe" data-target-site="dict-fr-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
+                    <div class="narecie-tab tab-content">
+                        <iframe class="dynamic-iframe" data-target-site="narecie-sk" src="https://narecie.sk/" title="Slovak Dialects"></iframe>
                     </div>
-                    <div class="tab-content" data-tab="3">                      
-                        <iframe class="dynamic-iframe" data-target-site="etymonline" src="https://www.etymonline.com" title="Etymology Online"></iframe>
+                    <div class="dict-sk-ua-tab tab-content">
+                        <iframe class="dynamic-iframe" data-target-site="dict-sk-ua" src="https://dict.com/%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%86%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
                     </div>
-                    <div class="tab-content" data-tab="4">
-                        <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
+                    <div class="sk-wikipedia-tab tab-content">
+                        <iframe class="dynamic-iframe" data-target-site="sk-wikipedia" src="https://sk.wikipedia.org/wiki" title="Slovak Wikipedia"></iframe>
                     </div>
-                    <div class="tab-content" data-tab="5">
-                        <iframe class="dynamic-iframe" data-target-site="conjugation-fr" src="https://www.conjugation-fr.com/index.html" title="Conjugation"></iframe>
+                    <div class="lingea-sk-ua-tab tab-content">
+                        <iframe class="dynamic-iframe" data-target-site="lingea-sk-ua" src="https://slovniky.lingea.sk/ukrajinsko-slovensky" title="Slovak Lingea"></iframe>
                     </div>
                 </div>
-
                 <!-- Progress Indicator -->
                 <div class="progress-indicator">
                     <div class="progress-dot active"></div>
@@ -190,41 +175,34 @@
                     <div class="progress-dot"></div>
                 </div>
             </div>
-        <div class="swipe-overlay" id="swipe-overlay"></div>
+            
             
         </section>
         <!-- Grid Layout -->
-        <!-- <section class="iframe-grid" id="grid-layout">
+        <section class="iframe-grid" id="grid-layout">
             <div class="iframe-card">
                 <div class="iframe-card-header">📚 English Wiktionary</div>
                 <iframe class="dynamic-iframe" data-target-site="en-wiktionary" src="https://en.wiktionary.org/wiki" title="English Wiktionary"></iframe>
             </div>
             <div class="iframe-card">
-                <div class="iframe-card-header">📖 French Wiktionary</div>
-                <iframe class="dynamic-iframe" data-target-site="fr-wiktionary" src="https://fr.wiktionary.org/wiki" title="French Wiktionary"></iframe>
+                <div class="iframe-card-header">📖 Slovak Wiktionary</div>
+                <iframe class="dynamic-iframe" data-target-site="sk-wiktionary" src="https://sk.wiktionary.org/wiki" title="Slovak Wiktionary"></iframe>
             </div>
             <div class="iframe-card">
                 <div class="iframe-card-header">🔤 Dict.com</div>
-                <iframe class="dynamic-iframe" data-target-site="dict-fr-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
+                <iframe class="dynamic-iframe" data-target-site="dict-sk-ua" src="https://dict.com/%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%8C%D0%BA%D0%BE-%D1%83%D0%BA%D1%80%D0%B0%D1%96%D0%BD%D1%81%D1%8C%D0%BA%D0%B8%D0%B8" title="Dict.com"></iframe>
             </div>
             <div class="iframe-card">
-                <div class="iframe-card-header">🌱 Etymology Online</div>
-                <iframe class="dynamic-iframe" data-target-site="etymonline" src="https://www.etymonline.com" title="Etymology Online"></iframe>
+                <div class="iframe-card-header">🌐 Slovak Wikipedia</div>
+                <iframe class="dynamic-iframe" data-target-site="sk-wikipedia" src="https://sk.wikipedia.org/wiki" title="Slovak Wikipedia"></iframe>
             </div>
-            <div class="iframe-card">
-                <div class="iframe-card-header">🌐 French Wikipedia</div>
-                <iframe class="dynamic-iframe" data-target-site="fr-wikipedia" src="https://fr.wikipedia.org/wiki" title="French Wikipedia"></iframe>
-            </div>
-            <div class="iframe-card">
-                <div class="iframe-card-header">Conjugation</div>
-                <iframe class="dynamic-iframe" data-target-site="conjugation-fr" src="https://www.conjugation-fr.com/index.html" title="Conjugation"></iframe>
-            </div>
-        </section> -->
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 Nistros Free Access</p>
     </footer>
+    <script src="/Nistros/back-end/path-fixer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-    <script type="module" src="/main.js"></script>
+    <script src="/back-end/iframes.js" class="js-path-fixer"></script>
 </body>
 </html>

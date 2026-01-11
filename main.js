@@ -41,6 +41,7 @@ import { IframeApplication } from './back-end/features/iframes-modular.js';
 import { SwipeableTabs } from './back-end/features/swipe-overlay.js';
 import { CollapsibleManager } from './back-end/features/collapsible-bars.js';
 
+
 // Initialize the application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize the main iframe application
