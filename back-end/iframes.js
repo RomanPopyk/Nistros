@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return `https://fr.wikipedia.org/wiki/${encodedSearchTerm}`;
       case "sk-wikipedia":
         return `https://sk.wikipedia.org/wiki/${encodedSearchTerm}`;
+      case "commons":
+        return `https://commons.wikimedia.org/w/index.php?search=${encodedSearchTerm}&title=Special%3AMediaSearch&type=image`;
       case "glosbe-fr-ua":
         return `https://glosbe.com/fr/uk/${encodedSearchTerm}`;
       case "glosbe-sk-ua":
@@ -209,6 +211,7 @@ class SwipeableTabs {
   init() {
     this.applyLayoutStyles();
     this.generateProgressDots();
+    this.setupLoadingIndicators();
     this.bindEvents();
     this.updateActiveStates();
   }
@@ -246,6 +249,29 @@ class SwipeableTabs {
         iframe.style.border = "none";
         iframe.style.display = "block";
       }
+    });
+  }
+
+  setupLoadingIndicators() {
+    this.tabContents.forEach((content) => {
+      const iframe = content.querySelector(".dynamic-iframe");
+      if (!iframe) return;
+
+      content.style.position = "relative"; // so the loader can overlay it
+
+      const loader = document.createElement("div");
+      loader.className = "iframe-loader";
+      loader.innerHTML = `<div class="iframe-spinner"></div>`;
+      content.appendChild(loader);
+
+      iframe.addEventListener(
+        "load",
+        () => {
+          loader.style.opacity = "0";
+          setTimeout(() => loader.remove(), 300);
+        },
+        { once: true },
+      );
     });
   }
 
