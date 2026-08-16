@@ -905,13 +905,13 @@ link[rel="icon"] {
 
   .tab-button {
     margin: 0 1px;
-    padding: 10px 12px;
-    font-size: 13px;
+    padding: 6px 8px;
+    font-size: 12px;
     white-space: wrap;
   }
 
   .swipe-overlay {
-    height: 14dvh;
+    height: 10dvh;
   }
 }
 

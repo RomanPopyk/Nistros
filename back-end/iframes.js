@@ -657,7 +657,7 @@ updateClearButton();
 const titleElement = document.getElementById("french-title");
 
 function updateTitleText() {
-  if (window.innerWidth <= 380) {
+  if (window.innerWidth <= 510) {
     titleElement.textContent = "French";
   } else {
     titleElement.textContent = "Search French words";
