@@ -904,12 +904,14 @@ link[rel="icon"] {
   }
 
   .tab-button {
-    margin: 0 2px;
-    padding: 12px 14px;
-    font-size: 14px;
+    margin: 0 1px;
+    padding: 10px 12px;
+    font-size: 13px;
+    white-space: wrap;
   }
+
   .swipe-overlay {
-    height: 18dvh;
+    height: 14dvh;
   }
 }
 
