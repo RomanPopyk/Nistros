@@ -905,8 +905,8 @@ link[rel="icon"] {
 
   .tab-button {
     margin: 0 1px;
-    padding: 6px 8px;
-    font-size: 12px;
+    padding: 8px 8px;
+    font-size: 13px;
     white-space: wrap;
   }
 
@@ -926,6 +926,6 @@ link[rel="icon"] {
 }
 @media (min-width: 379px) and (max-width: 480px) {
   header {
-    padding: 6px 7px;
+    padding: 2px 6px;
   }
 }
